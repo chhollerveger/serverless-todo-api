@@ -1,0 +1,1 @@
+export { DynamoDbRepository } from './database/dynamodb/dynamodb-repository';

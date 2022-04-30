@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@models": ["src/models/index.ts"],
+      "@infra": ["src/infra/index.ts"],
+      "@factories": ["/src/factories/index.ts"],
+      "@controllers": ["src/controllers/index.ts"],
+      "@services": ["src/services/index.ts"],
+      "@utils": ["src/utils/index.ts"],
+      "@constraints": ["src/constraints/index.ts"],
+    }
+  }
+}
