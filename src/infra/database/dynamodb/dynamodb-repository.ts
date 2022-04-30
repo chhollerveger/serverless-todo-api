@@ -1,7 +1,7 @@
 import * as AWS from 'aws-sdk';
-import { ResponseModel } from '@/models';
+import { ResponseModel } from '@models';
 import { makeAwsConfig } from './config/aws-config';
-import { ClientTypes, IDynamoDbRepository } from '@/protocols';
+import { ClientTypes, IDynamoDbRepository } from '@protocols';
 
 export class DynamoDbRepository implements IDynamoDbRepository {
   constructor(private documentClient: AWS.DynamoDB.DocumentClient) {

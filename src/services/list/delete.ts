@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IDeleteListService } from "@/protocols";
+import { ClientTypes, IClientRepository, IDeleteListService } from "@protocols";
 
 export class DeleteListService implements IDeleteListService {
   private readonly listTableName = process.env.LIST_TABLE;

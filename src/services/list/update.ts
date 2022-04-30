@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IUpdateListService } from "@/protocols";
+import { ClientTypes, IClientRepository, IUpdateListService } from "@protocols";
 
 export class UpdateListService implements IUpdateListService {
   private readonly tableName = process.env.LIST_TABLE;

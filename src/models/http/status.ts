@@ -1,4 +1,4 @@
-import { Status, StatusCode } from "@/enums";
+import { Status, StatusCode } from "src/enums";
 
 export const STATUS_MESSAGES = {
   [StatusCode.OK]: Status.SUCCESS,

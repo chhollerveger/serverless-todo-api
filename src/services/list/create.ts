@@ -1,6 +1,6 @@
-import { ListModel } from "@/models";
-import { IList } from "@/models/list/list";
-import { ClientTypes, ICreateListService, IClientRepository } from "@/protocols";
+import { ListModel } from "@models";
+import { ClientTypes, ICreateListService, IClientRepository } from "@protocols";
+import { IList } from "@models";
 
 export class CreateListService implements ICreateListService {
   private readonly tableName = process.env.LIST_TABLE;

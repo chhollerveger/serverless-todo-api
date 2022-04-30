@@ -1,2 +1,2 @@
-export * from './status';
-export * from './status-code';
+export { Status } from './status/status';
+export { StatusCode } from './status/status-code';

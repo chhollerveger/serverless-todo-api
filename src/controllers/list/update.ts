@@ -1,8 +1,8 @@
 
 import 'source-map-support/register';
-import { ResponseModel } from '@/models';
-import { IController, IHttpResponse, IUpdateListService, IValidator } from '@/protocols';
-import { updateListConstraint } from '@/constraints';
+import { ResponseModel } from '@models';
+import { IController, IHttpResponse, IUpdateListService, IValidator } from '@protocols';
+import { updateListConstraint } from '@constraints';
 
 export class UpdateListController implements IController {
   constructor(

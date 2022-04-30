@@ -1,8 +1,8 @@
 
 import 'source-map-support/register';
-import { ResponseModel } from '@/models';
-import { IController, ICreateListService, IHttpResponse, IValidator } from '@/protocols';
-import { createListConstraint } from '@/constraints';
+import { ResponseModel } from '@models';
+import { IController, ICreateListService, IHttpResponse, IValidator } from '@protocols';
+import { createListConstraint } from '@constraints';
 
 export class CreateListController implements IController {
   constructor(

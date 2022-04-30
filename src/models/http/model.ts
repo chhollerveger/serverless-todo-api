@@ -1,5 +1,5 @@
-import { StatusCode } from "@/enums";
-import { IHttpResponse } from "@/protocols";
+import { IHttpResponse } from "@protocols";
+import { StatusCode } from "src/enums";
 import { IResponseBody } from "./body";
 import { RESPONSE_HEADERS } from "./header";
 import { STATUS_MESSAGES } from "./status";

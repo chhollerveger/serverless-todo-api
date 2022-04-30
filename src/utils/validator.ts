@@ -1,6 +1,6 @@
 import { validate } from 'validate.js/validate';
-import { ResponseModel } from '@/models';
-import { IGenericType, IValidator } from '@/protocols';
+import { ResponseModel } from '@models';
+import { IGenericType, IValidator } from '@protocols';
 
 export class Validator implements IValidator {
 

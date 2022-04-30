@@ -1,4 +1,4 @@
-import { ResponseHeader } from "@/models";
+import { ResponseHeader } from "@models";
 
 export interface IHttpResponse {
   statusCode: number;

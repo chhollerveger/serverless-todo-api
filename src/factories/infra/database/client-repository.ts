@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
-import { DynamoDbRepository } from "@/infra";
-import { IClientRepository } from "@/protocols";
+import { DynamoDbRepository } from "@infra";
+import { IClientRepository } from "@protocols";
 
 export const makeClientRepository = (): IClientRepository => {
   const client = new AWS.DynamoDB.DocumentClient();

@@ -1,7 +1,7 @@
 import 'source-map-support/register';
-import { ResponseModel } from '@/models';
-import { IController, IDeleteListService, IHttpResponse, IValidator } from '@/protocols';
-import { getListConstraint } from '@/constraints';
+import { ResponseModel } from '@models';
+import { IController, IDeleteListService, IHttpResponse, IValidator } from '@protocols';
+import { getListConstraint } from '@constraints';
 
 export class DeleteListController implements IController {
   constructor(
