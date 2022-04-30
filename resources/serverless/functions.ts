@@ -50,18 +50,18 @@ export const makeFunctions = (): AWS['functions'] => {
         }
       ]
     },
-    // createTask: {
-    //   handler: 'handler.createTask',
-    //   events: [
-    //     {
-    //       http: {
-    //         method: 'POST',
-    //         path: 'task/create',
-    //         cors: true
-    //       }
-    //     }
-    //   ]
-    // },
+    createTask: {
+      handler: 'src.handlers.task.create.handler',
+      events: [
+        {
+          http: {
+            method: 'POST',
+            path: 'task/create',
+            cors: true
+          }
+        }
+      ]
+    },
     // deleteTask: {
     //   handler: 'handler.deleteTask',
     //   events: [
