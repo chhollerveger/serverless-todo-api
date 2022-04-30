@@ -2,7 +2,7 @@ import { v4 as UUID } from 'uuid';
 import { IProps } from "./props";
 import { ITask } from "./task";
 
-export default class TaskModel {
+export class TaskModel {
   private _id: string;
   private _listId: string;
   private _description: string;

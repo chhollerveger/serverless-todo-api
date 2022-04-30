@@ -8,4 +8,5 @@ export { ICreateListService } from './services/list/create';
 export { IUpdateListService } from './services/list/update';
 export { IGetListService } from './services/list/get';
 export { IDeleteListService } from './services/list/delete';
+export { ICreateTaskService } from './services/task/create';
 export { IHttpResponse} from './models/http-response';
