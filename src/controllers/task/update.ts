@@ -2,7 +2,7 @@
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
 import { IController, IHttpResponse, IUpdateTaskService, IValidator } from '@protocols';
-import { createTaskConstraint } from '@constraints';
+import { updateTaskConstraint } from '@constraints';
 
 export class UpdateTaskController implements IController {
   constructor(
@@ -13,7 +13,7 @@ export class UpdateTaskController implements IController {
   public async handle(body: string): Promise<IHttpResponse> {
     try {
       const request = JSON.parse(body);
-      this.validator.validateAgainstConstraints(request, createTaskConstraint());
+      this.validator.validateAgainstConstraints(request, updateTaskConstraint());
       const results = await this.updateTaskService.update(request);
       const response = new ResponseModel({ ...results.Attributes }, 200, 'Task successfully updated');
       return response.generate();
