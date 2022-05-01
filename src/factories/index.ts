@@ -5,3 +5,4 @@ export { makeDeleteListController } from './controllers/list/delete';
 export { makeGetListController } from './controllers/list/get';
 export { makeCreateTaskController } from './controllers/task/create';
 export { makeUpdateTaskController } from './controllers/task/update';
+export { makeDeleteTaskController } from './controllers/task/delete';
