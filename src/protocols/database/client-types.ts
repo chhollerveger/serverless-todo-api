@@ -18,4 +18,5 @@ export type GetItemOutput = AWS.DynamoDB.DocumentClient.GetItemOutput;
 export type DeleteItem = AWS.DynamoDB.DocumentClient.DeleteItemInput;
 export type DeleteItemOutput = AWS.DynamoDB.DocumentClient.DeleteItemOutput;
 
-export type AttributeMap = AWS.DynamoDB.DocumentClient.AttributeMap
+export type AttributeMap = AWS.DynamoDB.DocumentClient.AttributeMap;
+export type ExpressionAttributeValue = AWS.DynamoDB.DocumentClient.ExpressionAttributeValueMap;
