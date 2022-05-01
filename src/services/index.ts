@@ -5,3 +5,4 @@ export { DeleteListService } from './list/delete';
 export { CreateTaskService } from './task/create';
 export { UpdateTaskService } from './task/update';
 export { DeleteTaskService } from './task/delete';
+export { GetTaskService } from './task/get';
