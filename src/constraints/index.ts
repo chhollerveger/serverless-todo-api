@@ -3,3 +3,4 @@ export { updateListConstraint } from './list/update';
 export { getListConstraint } from './list/get';
 export { deleteListConstraint } from './list/delete';
 export { createTaskConstraint } from './task/create';
+export { updateTaskConstraint } from './task/update';
