@@ -62,6 +62,18 @@ export const makeFunctions = (): AWS['functions'] => {
         }
       ]
     },
+    updateTask: {
+      handler: 'src.handlers.task.update.handler',
+      events: [
+        {
+          http: {
+            method: 'POST',
+            path: 'task/update',
+            cors: true
+          }
+        }
+      ]
+    }
     // deleteTask: {
     //   handler: 'handler.deleteTask',
     //   events: [
@@ -74,17 +86,5 @@ export const makeFunctions = (): AWS['functions'] => {
     //     }
     //   ]
     // },
-    // updateTask: {
-    //   handler: 'handler.updateTask',
-    //   events: [
-    //     {
-    //       http: {
-    //         method: 'POST',
-    //         path: 'task/update',
-    //         cors: true
-    //       }
-    //     }
-    //   ]
-    // }
   }
 }
