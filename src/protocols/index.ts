@@ -10,4 +10,5 @@ export { IGetListService } from './services/list/get';
 export { IDeleteListService } from './services/list/delete';
 export { ICreateTaskService } from './services/task/create';
 export { IUpdateTaskService } from './services/task/update';
+export { IDeleteTaskService } from './services/task/delete';
 export { IHttpResponse} from './models/http-response';
