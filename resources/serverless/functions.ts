@@ -31,7 +31,7 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'post',
+            method: 'POST',
             path: 'list',
             cors: true
           }
@@ -81,6 +81,18 @@ export const makeFunctions = (): AWS['functions'] => {
           http: {
             method: 'POST',
             path: 'task/delete',
+            cors: true
+          }
+        }
+      ]
+    },
+    getTask: {
+      handler: 'src.handlers.task.get.handler',
+      events: [
+        {
+          http: {
+            method: 'POST',
+            path: 'task',
             cors: true
           }
         }
