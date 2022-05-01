@@ -73,18 +73,18 @@ export const makeFunctions = (): AWS['functions'] => {
           }
         }
       ]
+    },
+    deleteTask: {
+      handler: 'src.handlers.task.delete.handler',
+      events: [
+        {
+          http: {
+            method: 'POST',
+            path: 'task/delete',
+            cors: true
+          }
+        }
+      ]
     }
-    // deleteTask: {
-    //   handler: 'handler.deleteTask',
-    //   events: [
-    //     {
-    //       http: {
-    //         method: 'POST',
-    //         path: 'task/delete',
-    //         cors: true
-    //       }
-    //     }
-    //   ]
-    // },
   }
 }
