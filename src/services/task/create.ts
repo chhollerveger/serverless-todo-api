@@ -1,4 +1,4 @@
-import { ITask, TaskModel } from "@models";
+import { ITaskModel, TaskModel } from "@models";
 import { ClientTypes, IClientRepository, ICreateTaskService } from "@protocols";
 
 export class CreateTaskService implements ICreateTaskService {
@@ -17,7 +17,7 @@ export class CreateTaskService implements ICreateTaskService {
     return data.id;
   }
 
-  private params(data: ITask): ClientTypes.PutItem {
+  private params(data: ITaskModel): ClientTypes.PutItem {
     return {
       TableName: this.taskTableName,
       Item: {

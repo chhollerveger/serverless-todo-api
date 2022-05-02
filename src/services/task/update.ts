@@ -1,4 +1,4 @@
-import { ITask, ResponseModel } from "@models";
+import { ITaskModel, ResponseModel } from "@models";
 import { ClientTypes, IClientRepository, IUpdateTaskService } from "@protocols";
 
 export class UpdateTaskService implements IUpdateTaskService {
@@ -14,7 +14,7 @@ export class UpdateTaskService implements IUpdateTaskService {
     return await this.clientRepository.update(this.params(request));
   }
 
-  private params(data: ITask): ClientTypes.UpdateItem {
+  private params(data: ITaskModel): ClientTypes.UpdateItem {
     const { listId, id, completed, description } = data;
     const isCompletedPresent = typeof completed !== 'undefined';
 

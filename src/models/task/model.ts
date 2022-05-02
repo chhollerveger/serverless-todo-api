@@ -1,6 +1,5 @@
 import { v4 as UUID } from 'uuid';
-import { IProps } from "./props";
-import { ITask } from "./task";
+import { ITaskModel } from "./task-model";
 
 export class TaskModel {
   private _id: string;
@@ -8,7 +7,7 @@ export class TaskModel {
   private _description: string;
   private _completed: boolean;
 
-  constructor({ id = UUID(), listId, description = '', completed = false }: IProps) {
+  constructor({ id = UUID(), listId, description = '', completed = false }: ITaskModel) {
     this._id = id;
     this._listId = listId;
     this._description = description;
@@ -47,7 +46,7 @@ export class TaskModel {
     return this._completed;
   }
 
-  getEntityMappings(): ITask {
+  getEntityMappings(): ITaskModel {
     return {
       id: this.getId(),
       listId: this.getListId(),
