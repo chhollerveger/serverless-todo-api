@@ -1,6 +1,6 @@
 import { ListModel } from "@models";
 import { ClientTypes, ICreateListService, IClientRepository } from "@protocols";
-import { IList } from "@models";
+import { IListModel } from "@models";
 
 export class CreateListService implements ICreateListService {
   private readonly tableName = process.env.LIST_TABLE;
@@ -16,7 +16,7 @@ export class CreateListService implements ICreateListService {
     return data.id;
   }
 
-  private params(data: IList): ClientTypes.PutItem {
+  private params(data: IListModel): ClientTypes.PutItem {
     return {
       TableName: this.tableName,
       Item: {

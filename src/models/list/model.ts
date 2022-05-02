@@ -1,13 +1,12 @@
 import { v4 as UUID } from 'uuid';
-import { IList } from "./list";
-import { IProps } from './props';
+import { IListModel } from "./list-model";
 
 export class ListModel {
 
   private _id: string;
   private _name: string;
 
-  constructor({ id = UUID(), name = '' }: IProps) {
+  constructor({ id = UUID(), name = '' }: IListModel) {
     this._id = id;
     this._name = name;
   }
@@ -28,7 +27,7 @@ export class ListModel {
     return this._name;
   }
 
-  getEntityMappings(): IList {
+  getEntityMappings(): IListModel {
     return {
       id: this.getId(),
       name: this.getName(),
