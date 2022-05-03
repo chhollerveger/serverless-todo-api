@@ -1,6 +1,5 @@
 import { ListModel } from "@models";
 import { ClientTypes, ICreateListService, IClientRepository } from "@protocols";
-import { IListModel } from "@models";
 
 export class CreateListService implements ICreateListService {
   private readonly tableName = process.env.LIST_TABLE;
@@ -10,13 +9,12 @@ export class CreateListService implements ICreateListService {
   ) { }
 
   public async create(request: any): Promise<string> {
-    const listModel = new ListModel(request);
-    const data = listModel.getEntityMappings();
+    const data = new ListModel(request);
     await this.clientRepository.create(this.params(data));
     return data.id;
   }
 
-  private params(data: IListModel): ClientTypes.PutItem {
+  private params(data: ListModel): ClientTypes.PutItem {
     return {
       TableName: this.tableName,
       Item: {
