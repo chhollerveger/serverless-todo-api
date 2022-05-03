@@ -1,37 +1,28 @@
-import { v4 as UUID } from 'uuid';
-import { IListModel } from "./list-model";
+import { v4 as uuid } from 'uuid';
 
 export class ListModel {
+  private readonly _id: string;
+  private readonly _timestamp: number;
 
-  private _id: string;
-  private _name: string;
-
-  constructor({ id = UUID(), name = '' }: IListModel) {
-    this._id = id;
-    this._name = name;
+  constructor(private _name: string) {
+    this._id = uuid();
+    this._timestamp = new Date().getTime();
+    Object.freeze(this);
   }
 
-  setId(value: string) {
-    this._id = value !== '' ? value : null;
-  }
-
-  getId() {
+  get id(): string {
     return this._id;
   }
 
-  setName(value: string) {
-    this._name = value !== '' ? value : null;
+  set name(name: string) {
+    this._name = name !== '' ? name : null;
   }
 
-  getName() {
+  get name(): string {
     return this._name;
   }
 
-  getEntityMappings(): IListModel {
-    return {
-      id: this.getId(),
-      name: this.getName(),
-      timestamp: new Date().getTime(),
-    };
+  get timestamp(): number {
+    return this._timestamp;
   }
 }
