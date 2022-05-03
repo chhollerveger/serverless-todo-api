@@ -1,4 +1,4 @@
-import { ITaskModel, TaskModel } from "@models";
+import { TaskModel } from "@models";
 import { ClientTypes, IClientRepository, ICreateTaskService } from "@protocols";
 
 export class CreateTaskService implements ICreateTaskService {
