@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 export class TaskModel {
   private readonly _id: string;
+  private readonly _timestamp: number;
 
   constructor(
     private readonly _listId: string,
@@ -9,6 +10,7 @@ export class TaskModel {
     private _completed: boolean
   ) {
     this._id = uuid();
+    this._timestamp = new Date().getTime();
     Object.freeze(this);
   }
 
@@ -34,5 +36,9 @@ export class TaskModel {
 
   set completed(completed: boolean) {
     this._completed = completed ? completed : null;
+  }
+
+  get timestamp(): number {
+    return this._timestamp;
   }
 }
