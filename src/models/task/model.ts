@@ -1,58 +1,38 @@
-import { v4 as UUID } from 'uuid';
-import { ITaskModel } from "./task-model";
+import { v4 as uuid } from 'uuid';
 
 export class TaskModel {
-  private _id: string;
-  private _listId: string;
-  private _description: string;
-  private _completed: boolean;
+  private readonly _id: string;
 
-  constructor({ id = UUID(), listId, description = '', completed = false }: ITaskModel) {
-    this._id = id;
-    this._listId = listId;
-    this._description = description;
-    this._completed = completed;
+  constructor(
+    private readonly _listId: string,
+    private _description: string,
+    private _completed: boolean
+  ) {
+    this._id = uuid();
+    Object.freeze(this);
   }
 
-  setId(value: string) {
-    this._id = value !== '' ? value : null;
-  }
-
-  getId() {
+  get id(): string {
     return this._id;
   }
 
-  setListId(value: string) {
-    this._listId = value !== '' ? value : null;
-  }
-
-  getListId() {
+  get listId(): string {
     return this._listId;
   }
 
-  setDescription(value: string) {
-    this._description = value ? value : null;
-  }
-
-  getDescription() {
+  get description(): string {
     return this._description;
   }
 
-  setCompleted(value: boolean) {
-    this._completed = value ? value : null;
+  set description(description: string) {
+    this._description = description ? description : null;
   }
 
-  getCompleted() {
+  get completed(): boolean {
     return this._completed;
   }
 
-  getEntityMappings(): ITaskModel {
-    return {
-      id: this.getId(),
-      listId: this.getListId(),
-      description: this.getDescription(),
-      completed: this.getCompleted(),
-      timestamp: new Date().getTime(),
-    };
+  set completed(completed: boolean) {
+    this._completed = completed ? completed : null;
   }
 }
