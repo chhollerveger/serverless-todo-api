@@ -11,13 +11,12 @@ export class CreateTaskService implements ICreateTaskService {
 
   public async create(request: any): Promise<string> {
     await this.clientRepository.get({ Key: request.listId, TableName: this.listTableName });
-    const taskModel = new TaskModel(request);
-    const data = taskModel.getEntityMappings();
+    const data = new TaskModel(request.listId, request.description, request.completed);
     await this.clientRepository.create(this.params(data));
     return data.id;
   }
 
-  private params(data: ITaskModel): ClientTypes.PutItem {
+  private params(data: TaskModel): ClientTypes.PutItem {
     return {
       TableName: this.taskTableName,
       Item: {
