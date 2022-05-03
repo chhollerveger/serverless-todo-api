@@ -1,6 +1,6 @@
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, IGetListService, IHttpResponse, IValidator } from '@protocols';
+import { IController, IGetListService, HttpResponse, IValidator } from '@protocols';
 import { getListConstraint } from '@constraints';
 
 export class GetListController implements IController {
@@ -9,7 +9,7 @@ export class GetListController implements IController {
     private getListService: IGetListService,
   ) { }
 
-  public async handle(body: string): Promise<IHttpResponse> {
+  public async handle(body: string): Promise<HttpResponse> {
     try {
       const request = JSON.parse(body);
       this.validator.validateAgainstConstraints(request, getListConstraint());

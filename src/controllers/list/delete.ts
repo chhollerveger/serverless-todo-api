@@ -1,6 +1,6 @@
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, IDeleteListService, IHttpResponse, IValidator } from '@protocols';
+import { IController, IDeleteListService, HttpResponse, IValidator } from '@protocols';
 import { getListConstraint } from '@constraints';
 
 export class DeleteListController implements IController {
@@ -9,7 +9,7 @@ export class DeleteListController implements IController {
     private deleteListService: IDeleteListService,
   ) { }
 
-  public async handle(body: string): Promise<IHttpResponse> {
+  public async handle(body: string): Promise<HttpResponse> {
     try {
       const request = JSON.parse(body);
       this.validator.validateAgainstConstraints(request, getListConstraint());

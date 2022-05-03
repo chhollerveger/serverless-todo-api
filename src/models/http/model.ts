@@ -1,7 +1,6 @@
-import { IHttpResponse } from "@protocols";
+import { makeHttpResponseHeaders, HttpResponse } from "@protocols";
 import { StatusCode } from "src/enums";
 import { IResponseBody } from "./body";
-import { RESPONSE_HEADERS } from "./header";
 import { STATUS_MESSAGES } from "./status";
 
 export class ResponseModel {
@@ -47,10 +46,10 @@ export class ResponseModel {
     return this.body.message;
   }
 
-  generate = (): IHttpResponse => {
+  generate = (): HttpResponse => {
     return {
       statusCode: this.code,
-      headers: RESPONSE_HEADERS,
+      headers: makeHttpResponseHeaders(),
       body: JSON.stringify(this.body),
     };
   }

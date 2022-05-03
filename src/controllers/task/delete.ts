@@ -1,7 +1,7 @@
 
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, IDeleteTaskService, IHttpResponse, IValidator } from '@protocols';
+import { IController, IDeleteTaskService, HttpResponse, IValidator } from '@protocols';
 import { deleteTaskConstraint } from '@constraints';
 
 export class DeleteTaskController implements IController {
@@ -10,7 +10,7 @@ export class DeleteTaskController implements IController {
     private deleteTaskService: IDeleteTaskService,
   ) { }
 
-  public async handle(body: string): Promise<IHttpResponse> {
+  public async handle(body: string): Promise<HttpResponse> {
     try {
       const request = JSON.parse(body);
       this.validator.validateAgainstConstraints(request, deleteTaskConstraint());

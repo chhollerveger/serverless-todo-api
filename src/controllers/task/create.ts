@@ -1,7 +1,7 @@
 
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, ICreateTaskService, IHttpResponse, IValidator } from '@protocols';
+import { IController, ICreateTaskService, HttpResponse, IValidator } from '@protocols';
 import { createTaskConstraint } from '@constraints';
 
 export class CreateTaskController implements IController {
@@ -10,7 +10,7 @@ export class CreateTaskController implements IController {
     private createTaskService: ICreateTaskService,
   ) { }
 
-  public async handle(body: string): Promise<IHttpResponse> {
+  public async handle(body: string): Promise<HttpResponse> {
     try {
       const request = JSON.parse(body);
       this.validator.validateAgainstConstraints(request, createTaskConstraint());

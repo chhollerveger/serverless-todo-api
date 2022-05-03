@@ -1,3 +1,5 @@
+export { HttpResponse } from './models/http/response';
+export { makeHttpResponseHeaders } from './models/http/header';
 export { IClientRepository } from './database/client-repository';
 export { IDynamoDbRepository } from './database/dynamodb/dynamodb-repository';
 export * as ClientTypes from './database/client-types';
@@ -12,4 +14,3 @@ export { ICreateTaskService } from './services/task/create';
 export { IUpdateTaskService } from './services/task/update';
 export { IDeleteTaskService } from './services/task/delete';
 export { IGetTaskService } from './services/task/get';
-export { IHttpResponse} from './models/http-response';

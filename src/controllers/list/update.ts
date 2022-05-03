@@ -1,7 +1,7 @@
 
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, IHttpResponse, IUpdateListService, IValidator } from '@protocols';
+import { IController, HttpResponse, IUpdateListService, IValidator } from '@protocols';
 import { updateListConstraint } from '@constraints';
 
 export class UpdateListController implements IController {
@@ -10,7 +10,7 @@ export class UpdateListController implements IController {
     private updateListService: IUpdateListService,
   ) { }
 
-  public async handle(body: string): Promise<IHttpResponse> {
+  public async handle(body: string): Promise<HttpResponse> {
     try {
       const request = JSON.parse(body);
       this.validator.validateAgainstConstraints(request, updateListConstraint());
