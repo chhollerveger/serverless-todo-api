@@ -5,9 +5,9 @@ export class UpdateListService implements IUpdateListService {
 
   constructor(private clientRepository: IClientRepository) { }
 
-  public async update(request: ListDto): Promise<any> {
+  public async update(request: ListDto): Promise<void> {
     await this.clientRepository.get(this.getParams(request));
-    return await this.clientRepository.update(this.updateParams(request));
+    await this.clientRepository.update(this.updateParams(request));
   }
 
   private getParams(request: ListDto): ClientTypes.DeleteItem {

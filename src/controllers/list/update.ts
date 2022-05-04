@@ -18,8 +18,8 @@ export class UpdateListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       const request = converterToType(data, ListDto);
-      const results = await this.updateListService.update(request);
-      return HttpResponseCreator.success('To-do list successfully updated', { ...results.Attributes })
+      await this.updateListService.update(request);
+      return HttpResponseCreator.success('To-do list successfully updated');
     } catch (error) {
       return HttpResponseCreator.serverError(error);
     }
