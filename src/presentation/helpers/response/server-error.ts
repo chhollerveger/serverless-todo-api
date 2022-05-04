@@ -2,7 +2,7 @@ import { IResponseBody } from "@protocols";
 import { StatusName } from "../http/status";
 
 export class ServerError extends Error implements IResponseBody {
-  constructor(message: string, stack: string) {
+  constructor(message: string, stack: string = undefined) {
     super(message);
     this.name = StatusName.ServerError;
     this.stack = stack

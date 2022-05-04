@@ -1,7 +1,7 @@
 import * as AWS from 'aws-sdk';
-import { ResponseModel } from '@models';
 import { makeAwsConfig } from './config/aws-config';
 import { ClientTypes, IDynamoDbRepository } from '@protocols';
+import { ServerError } from '@presentation';
 
 export class DynamoDbRepository implements IDynamoDbRepository {
   constructor(private documentClient: AWS.DynamoDB.DocumentClient) {
@@ -12,7 +12,7 @@ export class DynamoDbRepository implements IDynamoDbRepository {
     try {
       return await this.documentClient.put(params).promise();
     } catch (error) {
-      throw new ResponseModel({}, 500, `create-error: ${error}`);
+      throw new ServerError(`create-error: ${error}`);
     }
   }
 
@@ -20,7 +20,7 @@ export class DynamoDbRepository implements IDynamoDbRepository {
     try {
       return await this.documentClient.batchWrite(params).promise();
     } catch (error) {
-      throw new ResponseModel({}, 500, `batch-write-error: ${error}`);
+      throw new ServerError(`batch-write-error: ${error}`);
     }
   }
 
@@ -28,7 +28,7 @@ export class DynamoDbRepository implements IDynamoDbRepository {
     try {
       return await this.documentClient.update(params).promise();
     } catch (error) {
-      throw new ResponseModel({}, 500, `update-error: ${error}`);
+      throw new ServerError(`update-error: ${error}`);
     }
   }
 
@@ -36,7 +36,7 @@ export class DynamoDbRepository implements IDynamoDbRepository {
     try {
       return await this.documentClient.query(params).promise();
     } catch (error) {
-      throw new ResponseModel({}, 500, `query-error: ${error}`);
+      throw new ServerError(`query-error: ${error}`);
     }
   }
 
@@ -44,7 +44,7 @@ export class DynamoDbRepository implements IDynamoDbRepository {
     try {
       return await this.documentClient.get(params).promise();
     } catch (error) {
-      throw new ResponseModel({}, 500, `get-error: ${error}`);
+      throw new ServerError(`get-error: ${error}`);
     }
   }
 
@@ -52,7 +52,7 @@ export class DynamoDbRepository implements IDynamoDbRepository {
     try {
       return await this.documentClient.delete(params).promise();
     } catch (error) {
-      throw new ResponseModel({}, 500, `delete-error: ${error}`);
+      throw new ServerError(`delete-error: ${error}`);
     }
   }
 }
