@@ -1,5 +1,5 @@
 import { IResponseBody } from "@protocols"
-import { StatusName } from "../helpers/status";
+import { StatusName } from "../http/status";
 
 export class BadRequestError<T = any> extends Error implements IResponseBody {
   data?: any;

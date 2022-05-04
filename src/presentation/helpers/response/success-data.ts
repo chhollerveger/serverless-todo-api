@@ -1,5 +1,5 @@
 import { IGenericType, IResponseBody } from "@protocols"
-import { StatusName } from "../helpers/status";
+import { StatusName } from "../http/status";
 
 export class SuccessData implements IResponseBody {
   message: string;
