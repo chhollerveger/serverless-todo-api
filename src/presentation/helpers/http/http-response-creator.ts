@@ -10,19 +10,19 @@ export class HttpResponseCreator {
   public static success = (message: string, data: IGenericType<{}> = undefined): HttpResponse => ({
     statusCode: StatusCode.Success,
     headers: makeHttpResponseHeaders(),
-    body: new SuccessData(message, data)
+    body: JSON.stringify(new SuccessData(message, data))
   });
 
   public static badRequest = (error: Error): HttpResponse => ({
     statusCode: StatusCode.BadRequest,
     headers: makeHttpResponseHeaders(),
-    body: error
+    body: JSON.stringify(error)
   });
 
   public static serverError = (error: Error): HttpResponse => ({
     statusCode: StatusCode.ServerError,
     headers: makeHttpResponseHeaders(),
-    body: (error instanceof ServerError) ? error : new ServerError('Internal server error', error.stack)
+    body: JSON.stringify((error instanceof ServerError) ? error : new ServerError('Internal server error', error.stack))
   });
 }
 
