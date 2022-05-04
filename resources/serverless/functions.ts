@@ -8,7 +8,7 @@ export const makeFunctions = (): AWS['functions'] => {
         {
           http: {
             method: 'POST',
-            path: 'list/create',
+            path: 'list',
             cors: true
           }
         }
@@ -19,9 +19,18 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'POST',
-            path: 'list/delete',
-            cors: true
+            method: 'DELETE',
+            path: 'list',
+            cors: true,
+            request: {
+              parameters: {
+                paths: {
+                  listId: {
+                    required: true
+                  }
+                }
+              }
+            }
           }
         }
       ]
@@ -31,9 +40,18 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'POST',
+            method: 'GET',
             path: 'list',
-            cors: true
+            cors: true,
+            request: {
+              parameters: {
+                paths: {
+                  listId: {
+                    required: true
+                  }
+                }
+              }
+            }
           }
         }
       ]
@@ -43,8 +61,8 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'POST',
-            path: 'list/update',
+            method: 'UPDATE',
+            path: 'list',
             cors: true
           }
         }
