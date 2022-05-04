@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IGetListService, ITodoDto, ListRequestDto } from "@protocols";
+import { ClientTypes, IClientRepository, IGetListService, IListResponseDto, ListRequestDto } from "@protocols";
 
 export class GetListService implements IGetListService {
   private readonly listTableName = process.env.LIST_TABLE;
@@ -7,7 +7,7 @@ export class GetListService implements IGetListService {
 
   constructor(private clientRepository: IClientRepository) { }
 
-  public async get(request: ListRequestDto): Promise<ITodoDto> {
+  public async get(request: ListRequestDto): Promise<IListResponseDto> {
     const list = await this.clientRepository.get(this.getParams(request));
     const tasks = await this.clientRepository.query(this.queryParams(request));
     return this.formatData(list, tasks);
@@ -31,7 +31,7 @@ export class GetListService implements IGetListService {
     };
   }
 
-  private formatData(list: ClientTypes.GetItemOutput, tasks: ClientTypes.QueryItemOutput): ITodoDto {
+  private formatData(list: ClientTypes.GetItemOutput, tasks: ClientTypes.QueryItemOutput): IListResponseDto {
     return {
       id: list.Item.id,
       name: list.Item.name,
