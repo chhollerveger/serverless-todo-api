@@ -1,30 +1,31 @@
-import { ClientTypes, IClientRepository, IUpdateTaskService } from "@protocols";
+import { ClientTypes, IClientRepository, IUpdateTaskService, TaskDto } from "@protocols";
 
 export class UpdateTaskService implements IUpdateTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;
   private readonly listTableName = process.env.LIST_TABLE;
 
-  constructor(
-    private clientRepository: IClientRepository
-  ) { }
+  constructor(private clientRepository: IClientRepository) { }
 
-  public async update(request: any): Promise<ClientTypes.UpdateItemOutPut> {
-    await this.clientRepository.get({ Key: request.listId, TableName: this.listTableName });
-    return await this.clientRepository.update(this.params(request));
+  public async update(request: TaskDto): Promise<ClientTypes.UpdateItemOutPut> {
+    await this.clientRepository.get(this.getParams(request));
+    return await this.clientRepository.update(this.updateParams(request));
   }
 
-  private params(data: ITaskModel): ClientTypes.UpdateItem {
-    const { listId, id, completed, description } = data;
-    const isCompletedPresent = typeof completed !== 'undefined';
+  private getParams(request: TaskDto): ClientTypes.DeleteItem {
+    return {
+      TableName: this.listTableName,
+      Key: { id: request.listId },
+    };
+  }
 
-    if (!description && !isCompletedPresent) {
-      throw new ResponseModel({}, 400, 'Invalid Request!');
-    }
+  private updateParams(request: TaskDto): ClientTypes.UpdateItem {
+    const { listId, taskId, completed, description } = request;
+    const isCompletedPresent = typeof completed !== 'undefined';
 
     return {
       TableName: this.taskTableName,
       Key: {
-        "id": id,
+        "id": taskId,
         "listId": listId
       },
       UpdateExpression: this.setUpdateExpression(description, completed),

@@ -1,22 +1,27 @@
 import { TaskModel } from "@models";
-import { ClientTypes, IClientRepository, ICreateTaskService } from "@protocols";
+import { ClientTypes, IClientRepository, ICreateTaskService, TaskDto } from "@protocols";
 
 export class CreateTaskService implements ICreateTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;
   private readonly listTableName = process.env.LIST_TABLE;
 
-  constructor(
-    private clientRepository: IClientRepository
-  ) { }
+  constructor(private clientRepository: IClientRepository) { }
 
-  public async create(request: any): Promise<string> {
-    await this.clientRepository.get({ Key: request.listId, TableName: this.listTableName });
+  public async create(request: TaskDto): Promise<string> {
+    await this.clientRepository.get(this.getParams(request));
     const data = new TaskModel(request.listId, request.description, request.completed);
-    await this.clientRepository.create(this.params(data));
+    await this.clientRepository.create(this.createParams(data));
     return data.id;
   }
 
-  private params(data: TaskModel): ClientTypes.PutItem {
+  private getParams(request: TaskDto): ClientTypes.DeleteItem {
+    return {
+      TableName: this.listTableName,
+      Key: { id: request.listId },
+    };
+  }
+
+  private createParams(data: TaskModel): ClientTypes.PutItem {
     return {
       TableName: this.taskTableName,
       Item: {
