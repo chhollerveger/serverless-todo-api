@@ -1,9 +1,9 @@
-import { IResponseBody } from "@protocols"
+import { IGenericType, IResponseBody } from "@protocols"
 import { StatusName } from "../http/status";
 
-export class BadRequestError<T = any> extends Error implements IResponseBody {
-  data?: any;
-  constructor(message: string, data: T) {
+export class BadRequestError extends Error implements IResponseBody {
+  data: IGenericType<{}>;
+  constructor(message: string, data: IGenericType<{}>) {
     super(message);
     this.name = StatusName.BadRequest;
     this.data = data;
