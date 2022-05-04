@@ -1,3 +1,5 @@
+import { ListDto } from "@protocols";
+
 export interface IDeleteListService {
-  delete(request: any): Promise<void>;
+  delete(request: ListDto): Promise<void>;
 }

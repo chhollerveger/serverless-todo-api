@@ -1,3 +1,5 @@
+import { ListDto } from "@protocols";
+
 export interface IGetListService {
-  get(request: any): Promise<any>;
+  get(request: ListDto): Promise<any>;
 }

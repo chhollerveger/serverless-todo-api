@@ -1,3 +1,5 @@
+import { ListDto } from "@protocols";
+
 export interface ICreateListService {
-  create(request: any): Promise<string>;
+  create(request: ListDto): Promise<string>;
 }

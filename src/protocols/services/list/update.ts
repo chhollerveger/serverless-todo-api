@@ -1,3 +1,5 @@
+import { ListDto } from "@protocols";
+
 export interface IUpdateListService {
-  update(request: any): Promise<any>;
+  update(request: ListDto): Promise<any>;
 }
