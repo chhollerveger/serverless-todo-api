@@ -18,7 +18,7 @@ export class DeleteListController implements IController {
       }
       const request = converterToType(data, ListDto);
       await this.deleteListService.delete(request);
-      return HttpResponseCreator.success('To-do list successfully deleted')
+      return HttpResponseCreator.success('To-do list successfully deleted');
     } catch (error) {
       return HttpResponseCreator.serverError(error);
     }

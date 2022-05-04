@@ -2,7 +2,7 @@ export interface ITodoDto {
   id: string;
   name: string;
   createdAt: number;
-  updatedAt: 1609475930597;
+  updatedAt: number;
   taskCount: number;
   tasks: ITaskTodo[]
 
