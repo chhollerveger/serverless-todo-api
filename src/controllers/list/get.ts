@@ -17,8 +17,8 @@ export class GetListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       const request = converterToType(data, ListDto);
-      const results = await this.getListService.get(request);
-      return HttpResponseCreator.success('To-do list successfully retrieved', { results })
+      const result = await this.getListService.get(request);
+      return HttpResponseCreator.success('To-do list successfully retrieved', { result });
     } catch (error) {
       return HttpResponseCreator.serverError(error)
     }

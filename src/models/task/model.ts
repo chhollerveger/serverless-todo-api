@@ -41,4 +41,12 @@ export class TaskModel {
   get timestamp(): number {
     return this._timestamp;
   }
+
+  get createdAt(): number {
+    return this._timestamp;
+  }
+
+  get updatedAt(): number {
+    return this._timestamp;
+  }
 }

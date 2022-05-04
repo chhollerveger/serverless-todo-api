@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IGetListService, ListDto } from "@protocols";
+import { ClientTypes, IClientRepository, IGetListService, ITodoDto, ListDto } from "@protocols";
 
 export class GetListService implements IGetListService {
   private readonly listTableName = process.env.LIST_TABLE;
@@ -7,7 +7,7 @@ export class GetListService implements IGetListService {
 
   constructor(private clientRepository: IClientRepository) { }
 
-  public async get(request: ListDto): Promise<any> {
+  public async get(request: ListDto): Promise<ITodoDto> {
     const list = await this.clientRepository.get(this.getParams(request));
     const tasks = await this.clientRepository.query(this.queryParams(request));
     return this.formatData(list, tasks);
@@ -31,11 +31,20 @@ export class GetListService implements IGetListService {
     };
   }
 
-  private formatData(list: ClientTypes.GetItemOutput, tasks: ClientTypes.QueryItemOutput): any {
+  private formatData(list: ClientTypes.GetItemOutput, tasks: ClientTypes.QueryItemOutput): ITodoDto {
     return {
-      ...list.Item,
+      id: list.Item.id,
+      name: list.Item.name,
+      createdAt: list.Item.createdAt,
+      updatedAt: list.Item.updatedAt,
       taskCount: tasks.Count,
-      tasks: tasks.Items.map((task) => { task })
+      tasks: tasks?.Items?.length > 0 ? tasks.Items.map((task) => ({
+        id: task.id,
+        description: task.description,
+        completed: task.completed,
+        createdAt: task.createdAt,
+        updatedAt: task.updatedAt,
+      })) : []
     }
   }
 }
