@@ -1,8 +1,9 @@
 
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, HttpResponse, IUpdateTaskService, IValidator } from '@protocols';
+import { IController, HttpResponse, IUpdateTaskService, IValidator, TaskDto } from '@protocols';
 import { updateTaskConstraint } from '@constraints';
+import { converterToType } from '@utils';
 
 export class UpdateTaskController implements IController {
   constructor(
@@ -10,10 +11,10 @@ export class UpdateTaskController implements IController {
     private updateTaskService: IUpdateTaskService,
   ) { }
 
-  public async handle(body: string): Promise<HttpResponse> {
+  public async handle(data: any): Promise<HttpResponse> {
     try {
-      const request = JSON.parse(body);
-      this.validator.validateAgainstConstraints(request, updateTaskConstraint());
+      this.validator.validateAgainstConstraints(data, updateTaskConstraint());
+      const request = converterToType(data, TaskDto);
       const results = await this.updateTaskService.update(request);
       const response = new ResponseModel({ ...results.Attributes }, 200, 'Task successfully updated');
       return response.generate();

@@ -1,8 +1,9 @@
 
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, ICreateTaskService, HttpResponse, IValidator } from '@protocols';
+import { IController, ICreateTaskService, HttpResponse, IValidator, TaskDto } from '@protocols';
 import { createTaskConstraint } from '@constraints';
+import { converterToType } from '@utils';
 
 export class CreateTaskController implements IController {
   constructor(
@@ -10,10 +11,10 @@ export class CreateTaskController implements IController {
     private createTaskService: ICreateTaskService,
   ) { }
 
-  public async handle(body: string): Promise<HttpResponse> {
+  public async handle(data: any): Promise<HttpResponse> {
     try {
-      const request = JSON.parse(body);
-      this.validator.validateAgainstConstraints(request, createTaskConstraint());
+      this.validator.validateAgainstConstraints(data, createTaskConstraint());
+      const request = converterToType(data, TaskDto);
       const taskId = await this.createTaskService.create(request);
       const response = new ResponseModel({ taskId }, 200, 'Task successfully added');
       return response.generate();

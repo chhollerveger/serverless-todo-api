@@ -1,8 +1,9 @@
 
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, IGetTaskService, HttpResponse, IValidator } from '@protocols';
+import { IController, IGetTaskService, HttpResponse, IValidator, TaskDto } from '@protocols';
 import { getTaskConstraint } from '@constraints';
+import { converterToType } from '@utils';
 
 export class GetTaskController implements IController {
   constructor(
@@ -10,12 +11,12 @@ export class GetTaskController implements IController {
     private getTaskService: IGetTaskService,
   ) { }
 
-  public async handle(body: string): Promise<HttpResponse> {
+  public async handle(data: any): Promise<HttpResponse> {
     try {
-      const request = JSON.parse(body);
-      this.validator.validateAgainstConstraints(request, getTaskConstraint());
-      const data = await this.getTaskService.get(request);
-      const response = new ResponseModel({ ...data.Item }, 200, 'Task successfully retrieved');
+      this.validator.validateAgainstConstraints(data, getTaskConstraint());
+      const request = converterToType(data, TaskDto);
+      const results = await this.getTaskService.get(request);
+      const response = new ResponseModel({ ...results.Item }, 200, 'Task successfully retrieved');
       return response.generate();
     } catch (error) {
       const response = (error instanceof ResponseModel) ? error : new ResponseModel({}, 500, 'Task not found');
