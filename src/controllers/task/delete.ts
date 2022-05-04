@@ -1,9 +1,9 @@
 
 import 'source-map-support/register';
-import { IController, IDeleteTaskService, HttpResponse, IValidator, TaskDto } from '@protocols';
+import { IController, IDeleteTaskService, IValidator, TaskDto } from '@protocols';
 import { deleteTaskConstraint } from '@constraints';
 import { converterToType } from '@utils';
-import { HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator } from '@presentation';
 
 export class DeleteTaskController implements IController {
   constructor(

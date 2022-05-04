@@ -1,6 +1,3 @@
-export { HttpResponse } from './models/http/response';
-export { IResponseBody } from './models/http/body';
-export { makeHttpResponseHeaders } from './models/http/header';
 export { IClientRepository } from './database/client-repository';
 export { IDynamoDbRepository } from './database/dynamodb/dynamodb-repository';
 export * as ClientTypes from './database/client-types';

@@ -1,8 +1,8 @@
 import 'source-map-support/register';
-import { IController, IDeleteListService, HttpResponse, IValidator, ListDto } from '@protocols';
+import { IController, IDeleteListService, IValidator, ListDto } from '@protocols';
 import { getListConstraint } from '@constraints';
 import { converterToType } from '@utils';
-import { HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator } from '@presentation';
 
 export class DeleteListController implements IController {
   constructor(

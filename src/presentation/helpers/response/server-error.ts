@@ -1,4 +1,4 @@
-import { IResponseBody } from "@protocols";
+import { IResponseBody } from "../http/body";
 import { StatusName } from "../http/status";
 
 export class ServerError extends Error implements IResponseBody {

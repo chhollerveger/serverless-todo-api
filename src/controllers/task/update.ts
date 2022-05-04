@@ -1,9 +1,9 @@
 
 import 'source-map-support/register';
-import { IController, HttpResponse, IUpdateTaskService, IValidator, TaskDto } from '@protocols';
+import { IController, IUpdateTaskService, IValidator, TaskDto } from '@protocols';
 import { updateTaskConstraint } from '@constraints';
 import { converterToType } from '@utils';
-import { HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator } from '@presentation';
 
 export class UpdateTaskController implements IController {
   constructor(

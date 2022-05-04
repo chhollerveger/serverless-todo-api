@@ -1,4 +1,3 @@
-import { ITaskModel, ResponseModel } from "@models";
 import { ClientTypes, IClientRepository, IUpdateTaskService } from "@protocols";
 
 export class UpdateTaskService implements IUpdateTaskService {

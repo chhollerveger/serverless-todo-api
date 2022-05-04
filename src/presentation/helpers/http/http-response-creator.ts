@@ -1,6 +1,8 @@
 import { SuccessData } from "@presentation";
-import { HttpResponse, IGenericType, makeHttpResponseHeaders } from "@protocols"
+import { IGenericType } from "@protocols";
 import { ServerError } from "../response/server-error";
+import { makeHttpResponseHeaders } from "./header";
+import { HttpResponse } from "./response";
 import { StatusCode } from "./status";
 
 export class HttpResponseCreator {

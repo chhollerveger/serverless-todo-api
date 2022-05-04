@@ -1,5 +1,4 @@
-import { ClientTypes, IClientRepository } from "@protocols";
-import { IGetTaskService } from "src/protocols/services/task/get";
+import { ClientTypes, IClientRepository, IGetTaskService } from "@protocols";
 
 export class GetTaskService implements IGetTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;

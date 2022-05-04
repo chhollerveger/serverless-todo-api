@@ -1,9 +1,9 @@
 
 import 'source-map-support/register';
-import { IController, HttpResponse, IUpdateListService, IValidator, ListDto } from '@protocols';
+import { IController, IUpdateListService, IValidator, ListDto } from '@protocols';
 import { updateListConstraint } from '@constraints';
 import { converterToType } from '@utils';
-import { HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator } from '@presentation';
 
 export class UpdateListController implements IController {
   constructor(
