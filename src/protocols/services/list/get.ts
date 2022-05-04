@@ -1,5 +1,5 @@
-import { ITodoDto, ListDto } from "@protocols";
+import { ITodoDto, ListRequestDto } from "@protocols";
 
 export interface IGetListService {
-  get(request: ListDto): Promise<ITodoDto>;
+  get(request: ListRequestDto): Promise<ITodoDto>;
 }

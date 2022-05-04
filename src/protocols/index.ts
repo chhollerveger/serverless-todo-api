@@ -1,8 +1,8 @@
 export { IClientRepository } from './database/client-repository';
 export { IDynamoDbRepository } from './database/dynamodb/dynamodb-repository';
 export * as ClientTypes from './database/client-types';
-export { ListDto } from './dtos/list-dto';
-export { TaskDto } from './dtos/task-dto';
+export { ListRequestDto } from './dtos/requests/list-request-dto';
+export { TaskRequestDto } from './dtos/requests/task-request-dto';
 export { ITodoDto } from './dtos/todo-dto';
 export { IController } from './controllers/controller'
 export { IValidator } from './utils/validator';

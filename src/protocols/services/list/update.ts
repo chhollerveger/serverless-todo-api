@@ -1,5 +1,5 @@
-import { ListDto } from "@protocols";
+import { ListRequestDto } from "@protocols";
 
 export interface IUpdateListService {
-  update(request: ListDto): Promise<void>;
+  update(request: ListRequestDto): Promise<void>;
 }

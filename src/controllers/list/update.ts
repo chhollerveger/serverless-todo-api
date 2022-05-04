@@ -1,6 +1,6 @@
 
 import 'source-map-support/register';
-import { IController, IUpdateListService, IValidator, ListDto } from '@protocols';
+import { IController, IUpdateListService, IValidator, ListRequestDto } from '@protocols';
 import { updateListConstraint } from '@constraints';
 import { converterToType } from '@utils';
 import { HttpResponse, HttpResponseCreator } from '@presentation';
@@ -17,7 +17,7 @@ export class UpdateListController implements IController {
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, ListDto);
+      const request = converterToType(data, ListRequestDto);
       await this.updateListService.update(request);
       return HttpResponseCreator.success('To-do list successfully updated');
     } catch (error) {

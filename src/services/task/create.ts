@@ -1,5 +1,5 @@
 import { TaskModel } from "@models";
-import { ClientTypes, IClientRepository, ICreateTaskService, TaskDto } from "@protocols";
+import { ClientTypes, IClientRepository, ICreateTaskService, TaskRequestDto } from "@protocols";
 
 export class CreateTaskService implements ICreateTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;
@@ -7,14 +7,14 @@ export class CreateTaskService implements ICreateTaskService {
 
   constructor(private clientRepository: IClientRepository) { }
 
-  public async create(request: TaskDto): Promise<string> {
+  public async create(request: TaskRequestDto): Promise<string> {
     await this.clientRepository.get(this.getParams(request));
     const data = new TaskModel(request.listId, request.description, request.completed);
     await this.clientRepository.create(this.createParams(data));
     return data.id;
   }
 
-  private getParams(request: TaskDto): ClientTypes.DeleteItem {
+  private getParams(request: TaskRequestDto): ClientTypes.DeleteItem {
     return {
       TableName: this.listTableName,
       Key: { id: request.listId },

@@ -1,6 +1,6 @@
 
 import 'source-map-support/register';
-import { IController, IDeleteTaskService, IValidator, TaskDto } from '@protocols';
+import { IController, IDeleteTaskService, IValidator, TaskRequestDto } from '@protocols';
 import { deleteTaskConstraint } from '@constraints';
 import { converterToType } from '@utils';
 import { HttpResponse, HttpResponseCreator } from '@presentation';
@@ -17,7 +17,7 @@ export class DeleteTaskController implements IController {
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, TaskDto);
+      const request = converterToType(data, TaskRequestDto);
       await this.deleteTaskService.delete(request);
       return HttpResponseCreator.success('Task successfully deleted');
     } catch (error) {

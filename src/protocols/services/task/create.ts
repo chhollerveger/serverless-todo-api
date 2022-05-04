@@ -1,5 +1,5 @@
-import { TaskDto } from "@protocols";
+import { TaskRequestDto } from "@protocols";
 
 export interface ICreateTaskService {
-  create(request: TaskDto): Promise<string>;
+  create(request: TaskRequestDto): Promise<string>;
 }

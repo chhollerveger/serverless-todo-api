@@ -1,23 +1,23 @@
-import { ClientTypes, IClientRepository, IUpdateListService, ListDto } from "@protocols";
+import { ClientTypes, IClientRepository, IUpdateListService, ListRequestDto } from "@protocols";
 
 export class UpdateListService implements IUpdateListService {
   private readonly listTableName = process.env.LIST_TABLE;
 
   constructor(private clientRepository: IClientRepository) { }
 
-  public async update(request: ListDto): Promise<void> {
+  public async update(request: ListRequestDto): Promise<void> {
     await this.clientRepository.get(this.getParams(request));
     await this.clientRepository.update(this.updateParams(request));
   }
 
-  private getParams(request: ListDto): ClientTypes.DeleteItem {
+  private getParams(request: ListRequestDto): ClientTypes.DeleteItem {
     return {
       TableName: this.listTableName,
       Key: { id: request.listId },
     };
   }
 
-  private updateParams(request: ListDto): ClientTypes.UpdateItem {
+  private updateParams(request: ListRequestDto): ClientTypes.UpdateItem {
     return {
       TableName: this.listTableName,
       Key: {

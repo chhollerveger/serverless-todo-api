@@ -1,6 +1,6 @@
 
 import 'source-map-support/register';
-import { IController, IUpdateTaskService, IValidator, TaskDto } from '@protocols';
+import { IController, IUpdateTaskService, IValidator, TaskRequestDto } from '@protocols';
 import { updateTaskConstraint } from '@constraints';
 import { converterToType } from '@utils';
 import { BadRequestError, HttpResponse, HttpResponseCreator } from '@presentation';
@@ -17,7 +17,7 @@ export class UpdateTaskController implements IController {
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, TaskDto);
+      const request = converterToType(data, TaskRequestDto);
       const isCompletedPresent = typeof request.completed !== 'undefined';
       if (!request.description && !isCompletedPresent) {
         const present = ['description', 'completed'];

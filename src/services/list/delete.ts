@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IDeleteListService, ListDto } from "@protocols";
+import { ClientTypes, IClientRepository, IDeleteListService, ListRequestDto } from "@protocols";
 
 export class DeleteListService implements IDeleteListService {
   private readonly listTableName = process.env.LIST_TABLE;
@@ -8,21 +8,21 @@ export class DeleteListService implements IDeleteListService {
 
   constructor(private clientRepository: IClientRepository) { }
 
-  public async delete(request: ListDto): Promise<void> {
+  public async delete(request: ListRequestDto): Promise<void> {
     await this.clientRepository.get(this.params(request));
     await this.clientRepository.delete(this.params(request));
     const tasks = await this.clientRepository.query(this.queryTasksParams(request));
     await this.deleteTasks(tasks);
   }
 
-  private params(request: ListDto): ClientTypes.DeleteItem {
+  private params(request: ListRequestDto): ClientTypes.DeleteItem {
     return {
       TableName: this.listTableName,
       Key: { id: request.listId },
     };
   }
 
-  private queryTasksParams(request: ListDto): ClientTypes.QueryItem {
+  private queryTasksParams(request: ListRequestDto): ClientTypes.QueryItem {
     return {
       TableName: this.taskTableName,
       IndexName: this.listIndexName,

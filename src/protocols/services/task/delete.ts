@@ -1,5 +1,5 @@
-import { TaskDto } from "@protocols";
+import { TaskRequestDto } from "@protocols";
 
 export interface IDeleteTaskService {
-  delete(request: TaskDto): Promise<void>;
+  delete(request: TaskRequestDto): Promise<void>;
 }

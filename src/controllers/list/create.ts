@@ -1,6 +1,6 @@
 
 import 'source-map-support/register';
-import { IController, ICreateListService, IValidator, ListDto } from '@protocols';
+import { IController, ICreateListService, IValidator, ListRequestDto } from '@protocols';
 import { createListConstraint } from '@constraints';
 import { converterToType } from '@utils';
 import { HttpResponse, HttpResponseCreator } from '@presentation';
@@ -17,7 +17,7 @@ export class CreateListController implements IController {
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, ListDto);
+      const request = converterToType(data, ListRequestDto);
       const listId = await this.createListService.create(request);
       return HttpResponseCreator.success('To-do list successfully created', { listId });
     } catch (error) {

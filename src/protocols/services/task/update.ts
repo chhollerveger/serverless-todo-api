@@ -1,5 +1,5 @@
-import { ClientTypes, TaskDto } from "@protocols";
+import { ClientTypes, TaskRequestDto } from "@protocols";
 
 export interface IUpdateTaskService {
-  update(request: TaskDto): Promise<ClientTypes.UpdateItemOutPut>;
+  update(request: TaskRequestDto): Promise<ClientTypes.UpdateItemOutPut>;
 }

@@ -1,6 +1,6 @@
 
 import 'source-map-support/register';
-import { IController, ICreateTaskService, IValidator, TaskDto } from '@protocols';
+import { IController, ICreateTaskService, IValidator, TaskRequestDto } from '@protocols';
 import { createTaskConstraint } from '@constraints';
 import { converterToType } from '@utils';
 import { HttpResponse, HttpResponseCreator } from '@presentation';
@@ -17,7 +17,7 @@ export class CreateTaskController implements IController {
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, TaskDto);
+      const request = converterToType(data, TaskRequestDto);
       const taskId = await this.createTaskService.create(request);
       return HttpResponseCreator.success('Task successfully added', { taskId });
     } catch (error) {

@@ -1,5 +1,5 @@
-import { ListDto } from "@protocols";
+import { ListRequestDto } from "@protocols";
 
 export interface ICreateListService {
-  create(request: ListDto): Promise<string>;
+  create(request: ListRequestDto): Promise<string>;
 }
