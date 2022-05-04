@@ -6,7 +6,7 @@ export class SuccessData<T = any> implements IResponseBody {
   name: string;
   data: T;
 
-  constructor(message: string, data: T) {
+  constructor(message: string, data: T = undefined) {
     this.message = message;
     this.name = StatusName.Success;
     this.data = data

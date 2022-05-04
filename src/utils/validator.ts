@@ -1,13 +1,13 @@
 import { validate } from 'validate.js/validate';
-import { ResponseModel } from '@models';
 import { IGenericType, IValidator } from '@protocols';
+import { BadRequestError } from '@presentation';
 
 export class Validator implements IValidator {
 
-  public validateAgainstConstraints(values: IGenericType<string>, constraints: IGenericType<object>): void {
+  public validateAgainstConstraints(values: IGenericType<string>, constraints: IGenericType<object>): void | BadRequestError {
     const validation = validate(values, constraints);
     if (typeof validation !== 'undefined') {
-      throw new ResponseModel({ validation }, 400, 'required fields are missing');
+      return new BadRequestError('required fields are missing', { validation })
     }
   }
 }

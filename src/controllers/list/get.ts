@@ -3,6 +3,8 @@ import { ResponseModel } from '@models';
 import { IController, IGetListService, HttpResponse, IValidator, ListDto } from '@protocols';
 import { getListConstraint } from '@constraints';
 import { converterToType } from '@utils';
+import { badRequest, ok, serverError, SuccessData } from '@presentation';
+
 
 export class GetListController implements IController {
   constructor(
@@ -12,14 +14,15 @@ export class GetListController implements IController {
 
   public async handle(data: any): Promise<HttpResponse> {
     try {
-      this.validator.validateAgainstConstraints(data, getListConstraint());
+      const error = this.validator.validateAgainstConstraints(data, getListConstraint());
+      if (error) {
+        return badRequest(error);
+      }
       const request = converterToType(data, ListDto);
-      const result = await this.getListService.get(request);
-      const response = new ResponseModel(result, 200, 'To-do list successfully retrieved');
-      return response.generate();
+      const results = await this.getListService.get(request);
+      return ok(new SuccessData('To-do list successfully retrieved', { results }))
     } catch (error) {
-      const response = (error instanceof ResponseModel) ? error : new ResponseModel({}, 500, 'To-do list not found');
-      return response.generate();
+      return serverError(error)
     }
   }
 }
