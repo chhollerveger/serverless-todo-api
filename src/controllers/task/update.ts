@@ -20,7 +20,7 @@ export class UpdateTaskController implements IController {
       const request = converterToType(data, TaskRequestDto);
       const isCompletedPresent = typeof request.completed !== 'undefined';
       if (!request.description && !isCompletedPresent) {
-        const present = ['description', 'completed'];
+        const present = `description, completed`;
         return HttpResponseCreator.badRequest(new BadRequestError('Invalid request: at least one of them must be present.', { present }));
       }
       await this.updateTaskService.update(request);
