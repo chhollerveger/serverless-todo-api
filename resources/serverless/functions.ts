@@ -24,7 +24,7 @@ export const makeFunctions = (): AWS['functions'] => {
             cors: true,
             request: {
               parameters: {
-                paths: {
+                querystrings: {
                   listId: {
                     required: true
                   }
@@ -45,7 +45,7 @@ export const makeFunctions = (): AWS['functions'] => {
             cors: true,
             request: {
               parameters: {
-                paths: {
+                querystrings: {
                   listId: {
                     required: true
                   }
@@ -63,7 +63,16 @@ export const makeFunctions = (): AWS['functions'] => {
           http: {
             method: 'UPDATE',
             path: 'list',
-            cors: true
+            cors: true,
+            request: {
+              parameters: {
+                querystrings: {
+                  listId: {
+                    required: true
+                  }
+                }
+              }
+            }
           }
         }
       ]
