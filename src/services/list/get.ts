@@ -8,9 +8,9 @@ export class GetListService implements IGetListService {
   constructor(private clientRepository: IClientRepository) { }
 
   public async get(request: ListRequestDto): Promise<IListResponseDto> {
-    const list = await this.clientRepository.get(this.getParams(request));
-    const tasks = await this.clientRepository.query(this.queryParams(request));
-    return this.formatData(list, tasks);
+    const listData = await this.clientRepository.get(this.getParams(request));
+    const tasksData = await this.clientRepository.query(this.queryParams(request));
+    return this.formatData(listData, tasksData);
   }
 
   private getParams(request: ListRequestDto): ClientTypes.DeleteItem {
@@ -31,14 +31,14 @@ export class GetListService implements IGetListService {
     };
   }
 
-  private formatData(list: ClientTypes.GetItemOutput, tasks: ClientTypes.QueryItemOutput): IListResponseDto {
+  private formatData(listData: ClientTypes.GetItemOutput, tasksData: ClientTypes.QueryItemOutput): IListResponseDto {
     return {
-      id: list.Item.id,
-      name: list.Item.name,
-      createdAt: list.Item.createdAt,
-      updatedAt: list.Item.updatedAt,
-      taskCount: tasks.Count,
-      tasks: tasks?.Items?.length > 0 ? tasks.Items.map((task) => ({
+      id: listData.Item.id,
+      name: listData.Item.name,
+      createdAt: listData.Item.createdAt,
+      updatedAt: listData.Item.updatedAt,
+      taskCount: tasksData.Count,
+      tasks: tasksData?.Items?.length > 0 ? tasksData.Items.map((task) => ({
         id: task.id,
         description: task.description,
         completed: task.completed,

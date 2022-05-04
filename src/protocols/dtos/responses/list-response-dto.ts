@@ -1,4 +1,4 @@
-import { ITaskResponseTodo } from "./task-response-dto";
+import { ITaskResponseDto } from "./task-response-dto";
 
 export interface IListResponseDto {
   id: string;
@@ -6,5 +6,5 @@ export interface IListResponseDto {
   createdAt: number;
   updatedAt: number;
   taskCount: number;
-  tasks?: ITaskResponseTodo[];
+  tasks?: ITaskResponseDto[];
 }

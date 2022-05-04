@@ -4,7 +4,7 @@ export * as ClientTypes from './database/client-types';
 export { ListRequestDto } from './dtos/requests/list-request-dto';
 export { TaskRequestDto } from './dtos/requests/task-request-dto';
 export { IListResponseDto } from './dtos/responses/list-response-dto';
-export { ITaskResponseTodo } from './dtos/responses/task-response-dto';
+export { ITaskResponseDto } from './dtos/responses/task-response-dto';
 export { IController } from './controllers/controller'
 export { IValidator } from './utils/validator';
 export { IGenericType } from './utils/generic-type';

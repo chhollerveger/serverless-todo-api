@@ -1,5 +1,5 @@
-import { ClientTypes, TaskRequestDto } from "@protocols";
+import { ITaskResponseDto, TaskRequestDto } from "@protocols";
 
 export interface IGetTaskService {
-  get(request: TaskRequestDto): Promise<ClientTypes.GetItemOutput>;
+  get(request: TaskRequestDto): Promise<ITaskResponseDto>;
 }

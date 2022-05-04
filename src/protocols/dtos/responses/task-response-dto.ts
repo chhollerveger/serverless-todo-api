@@ -1,4 +1,4 @@
-export interface ITaskResponseTodo {
+export interface ITaskResponseDto {
   id: string;
   listId?: string;
   description: string;
