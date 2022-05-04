@@ -1,6 +1,6 @@
 import { HttpResponse, makeHttpResponseHeaders } from "@protocols"
-import { BadRequestError } from "../errors/bad-request-error";
-import { ServerError } from "../errors/server-error";
+import { BadRequestError } from "../response/bad-request-error";
+import { ServerError } from "../response/server-error";
 import { StatusCode } from "./status";
 
 
