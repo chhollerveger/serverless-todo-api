@@ -1,9 +1,9 @@
 
 import 'source-map-support/register';
-import { ResponseModel } from '@models';
 import { IController, IDeleteTaskService, HttpResponse, IValidator, TaskDto } from '@protocols';
 import { deleteTaskConstraint } from '@constraints';
 import { converterToType } from '@utils';
+import { HttpResponseCreator } from '@presentation';
 
 export class DeleteTaskController implements IController {
   constructor(
@@ -13,14 +13,15 @@ export class DeleteTaskController implements IController {
 
   public async handle(data: any): Promise<HttpResponse> {
     try {
-      this.validator.validateAgainstConstraints(data, deleteTaskConstraint());
+      const error = this.validator.validateAgainstConstraints(data, deleteTaskConstraint());
+      if (error) {
+        return HttpResponseCreator.badRequest(error);
+      }
       const request = converterToType(data, TaskDto);
       await this.deleteTaskService.delete(request);
-      const response = new ResponseModel({}, 200, 'Task successfully deleted');
-      return response.generate();
+      return HttpResponseCreator.success('Task successfully deleted');
     } catch (error) {
-      const response = (error instanceof ResponseModel) ? error : new ResponseModel({}, 500, 'Task could not be deleted');
-      return response.generate();
+      return HttpResponseCreator.serverError(error);
     }
   }
 }
