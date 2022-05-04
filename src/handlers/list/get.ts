@@ -3,5 +3,5 @@ import { makeGetListController } from "@factories";
 
 export const handler: APIGatewayProxyHandler = (event: APIGatewayEvent, _context: Context): Promise<APIGatewayProxyResult> => {
   const controller = makeGetListController();
-  return controller.handle(event.body);
+  return controller.handle(event);
 }

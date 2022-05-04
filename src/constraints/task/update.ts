@@ -1,12 +1,12 @@
 export const updateTaskConstraint = () => {
   return {
-    "listId": {
+    "taskId": {
       "presence": {
         "allowEmpty": false
       },
       "type": "string"
     },
-    "taskId": {
+    "listId": {
       "presence": {
         "allowEmpty": false
       },

@@ -1,12 +1,12 @@
 export const deleteTaskConstraint = () => {
   return {
-    "listId": {
+    "taskId": {
       "presence": {
         "allowEmpty": false
       },
       "type": "string"
     },
-    "taskId": {
+    "listId": {
       "presence": {
         "allowEmpty": false
       },

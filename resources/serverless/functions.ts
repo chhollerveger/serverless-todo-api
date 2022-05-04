@@ -74,7 +74,7 @@ export const makeFunctions = (): AWS['functions'] => {
         {
           http: {
             method: 'POST',
-            path: 'task/create',
+            path: 'task',
             cors: true
           }
         }
@@ -85,9 +85,18 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'POST',
-            path: 'task/update',
-            cors: true
+            method: 'UPDATE',
+            path: 'task',
+            cors: true,
+            request: {
+              parameters: {
+                querystrings: {
+                  taskId: {
+                    required: true
+                  }
+                }
+              }
+            }
           }
         }
       ]
@@ -97,9 +106,21 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'POST',
-            path: 'task/delete',
-            cors: true
+            method: 'DELETE',
+            path: 'task',
+            cors: true,
+            request: {
+              parameters: {
+                querystrings: {
+                  taskId: {
+                    required: true
+                  },
+                  listId: {
+                    required: true
+                  }
+                }
+              }
+            }
           }
         }
       ]
@@ -109,9 +130,21 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'POST',
+            method: 'GET',
             path: 'task',
-            cors: true
+            cors: true,
+            request: {
+              parameters: {
+                querystrings: {
+                  taskId: {
+                    required: true
+                  },
+                  listId: {
+                    required: true
+                  }
+                }
+              }
+            }
           }
         }
       ]
