@@ -1,7 +1,8 @@
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, IDeleteListService, HttpResponse, IValidator } from '@protocols';
+import { IController, IDeleteListService, HttpResponse, IValidator, ListDto } from '@protocols';
 import { getListConstraint } from '@constraints';
+import { converterToType } from '@utils';
 
 export class DeleteListController implements IController {
   constructor(
@@ -9,10 +10,10 @@ export class DeleteListController implements IController {
     private deleteListService: IDeleteListService,
   ) { }
 
-  public async handle(body: string): Promise<HttpResponse> {
+  public async handle(data: any): Promise<HttpResponse> {
     try {
-      const request = JSON.parse(body);
-      this.validator.validateAgainstConstraints(request, getListConstraint());
+      this.validator.validateAgainstConstraints(data, getListConstraint());
+      const request = converterToType(data, ListDto);
       await this.deleteListService.delete(request);
       const response = new ResponseModel({}, 200, 'To-do list successfully deleted');
       return response.generate();

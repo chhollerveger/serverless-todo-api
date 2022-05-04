@@ -1,21 +1,26 @@
-import { ClientTypes, IClientRepository, IGetListService } from "@protocols";
+import { ClientTypes, IClientRepository, IGetListService, ListDto } from "@protocols";
 
 export class GetListService implements IGetListService {
   private readonly listTableName = process.env.LIST_TABLE;
   private readonly taskTableName = process.env.TASKS_TABLE;
   private readonly listIndexName = 'list_index';
 
-  constructor(
-    private clientRepository: IClientRepository
-  ) { }
+  constructor(private clientRepository: IClientRepository) { }
 
-  public async get(request: any): Promise<any> {
-    const list = await this.clientRepository.get({ Key: request.listId, TableName: this.listTableName });
-    const tasks = await this.clientRepository.query(this.params(request));
+  public async get(request: ListDto): Promise<any> {
+    const list = await this.clientRepository.get(this.getParams(request));
+    const tasks = await this.clientRepository.query(this.queryParams(request));
     return this.formatData(list, tasks);
   }
 
-  private params(request: any): ClientTypes.QueryItem {
+  private getParams(request: ListDto): ClientTypes.DeleteItem {
+    return {
+      TableName: this.listTableName,
+      Key: { id: request.listId },
+    };
+  }
+
+  private queryParams(request: ListDto): ClientTypes.QueryItem {
     return {
       TableName: this.taskTableName,
       IndexName: this.listIndexName,

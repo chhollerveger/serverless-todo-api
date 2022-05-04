@@ -1,8 +1,9 @@
 
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, HttpResponse, IUpdateListService, IValidator } from '@protocols';
+import { IController, HttpResponse, IUpdateListService, IValidator, ListDto } from '@protocols';
 import { updateListConstraint } from '@constraints';
+import { converterToType } from '@utils';
 
 export class UpdateListController implements IController {
   constructor(
@@ -10,10 +11,10 @@ export class UpdateListController implements IController {
     private updateListService: IUpdateListService,
   ) { }
 
-  public async handle(body: string): Promise<HttpResponse> {
+  public async handle(data: any): Promise<HttpResponse> {
     try {
-      const request = JSON.parse(body);
-      this.validator.validateAgainstConstraints(request, updateListConstraint());
+      this.validator.validateAgainstConstraints(data, updateListConstraint());
+      const request = converterToType(data, ListDto);
       const results = await this.updateListService.update(request);
       const response = new ResponseModel({ ...results.Attributes }, 200, 'To-do list successfully updated');
       return response.generate();

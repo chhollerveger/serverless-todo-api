@@ -1,7 +1,8 @@
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, IGetListService, HttpResponse, IValidator } from '@protocols';
+import { IController, IGetListService, HttpResponse, IValidator, ListDto } from '@protocols';
 import { getListConstraint } from '@constraints';
+import { converterToType } from '@utils';
 
 export class GetListController implements IController {
   constructor(
@@ -9,12 +10,12 @@ export class GetListController implements IController {
     private getListService: IGetListService,
   ) { }
 
-  public async handle(body: string): Promise<HttpResponse> {
+  public async handle(data: any): Promise<HttpResponse> {
     try {
-      const request = JSON.parse(body);
-      this.validator.validateAgainstConstraints(request, getListConstraint());
-      const data = await this.getListService.get(request);
-      const response = new ResponseModel(data, 200, 'To-do list successfully retrieved');
+      this.validator.validateAgainstConstraints(data, getListConstraint());
+      const request = converterToType(data, ListDto);
+      const result = await this.getListService.get(request);
+      const response = new ResponseModel(result, 200, 'To-do list successfully retrieved');
       return response.generate();
     } catch (error) {
       const response = (error instanceof ResponseModel) ? error : new ResponseModel({}, 500, 'To-do list not found');

@@ -1,8 +1,9 @@
 
 import 'source-map-support/register';
 import { ResponseModel } from '@models';
-import { IController, ICreateListService, HttpResponse, IValidator } from '@protocols';
+import { IController, ICreateListService, HttpResponse, IValidator, ListDto } from '@protocols';
 import { createListConstraint } from '@constraints';
+import { converterToType } from '@utils';
 
 export class CreateListController implements IController {
   constructor(
@@ -10,10 +11,10 @@ export class CreateListController implements IController {
     private createListService: ICreateListService,
   ) { }
 
-  public async handle(body: string): Promise<HttpResponse> {
+  public async handle(data: any): Promise<HttpResponse> {
     try {
-      const request = JSON.parse(body);
-      this.validator.validateAgainstConstraints(request, createListConstraint());
+      this.validator.validateAgainstConstraints(data, createListConstraint());
+      const request = converterToType(data, ListDto);
       const listId = await this.createListService.create(request);
       const response = new ResponseModel({ listId }, 200, 'To-do list successfully created');
       return response.generate();

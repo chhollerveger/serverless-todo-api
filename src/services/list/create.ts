@@ -1,15 +1,13 @@
 import { ListModel } from "@models";
-import { ClientTypes, ICreateListService, IClientRepository } from "@protocols";
+import { ClientTypes, ICreateListService, IClientRepository, ListDto } from "@protocols";
 
 export class CreateListService implements ICreateListService {
   private readonly tableName = process.env.LIST_TABLE;
 
-  constructor(
-    private clientRepository: IClientRepository
-  ) { }
+  constructor(private clientRepository: IClientRepository) { }
 
-  public async create(request: any): Promise<string> {
-    const data = new ListModel(request);
+  public async create(request: ListDto): Promise<string> {
+    const data = new ListModel(request.name);
     await this.clientRepository.create(this.params(data));
     return data.id;
   }
