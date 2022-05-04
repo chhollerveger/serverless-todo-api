@@ -1,0 +1,24 @@
+import { HttpResponse, makeHttpResponseHeaders } from "@protocols"
+import { BadRequestError } from "../errors/bad-request-error";
+import { ServerError } from "../errors/server-error";
+import { StatusCode } from "./status";
+
+
+export const ok = (data: any): HttpResponse => ({
+  statusCode: StatusCode.Success,
+  headers: makeHttpResponseHeaders(),
+  body: data
+});
+
+export const badRequest = (error: BadRequestError): HttpResponse => ({
+  statusCode: StatusCode.BadRequest,
+  headers: makeHttpResponseHeaders(),
+  body: error
+});
+
+export const serverError = (error: ServerError): HttpResponse => ({
+  statusCode: StatusCode.ServerError,
+  headers: makeHttpResponseHeaders(),
+  body: (error instanceof ServerError) ? error : new ServerError('Internal server error', null)
+});
+
