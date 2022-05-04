@@ -23,8 +23,8 @@ export class UpdateTaskController implements IController {
         const present = ['description', 'completed'];
         return HttpResponseCreator.badRequest(new BadRequestError('Invalid request: at least one of them must be present.', { present }));
       }
-      const results = await this.updateTaskService.update(request);
-      return HttpResponseCreator.success('Task successfully updated', { ...results.Attributes })
+      await this.updateTaskService.update(request);
+      return HttpResponseCreator.success('Task successfully updated');
     } catch (error) {
       return HttpResponseCreator.serverError(error)
     }

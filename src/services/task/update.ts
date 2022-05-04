@@ -6,9 +6,9 @@ export class UpdateTaskService implements IUpdateTaskService {
 
   constructor(private clientRepository: IClientRepository) { }
 
-  public async update(request: TaskRequestDto): Promise<ClientTypes.UpdateItemOutPut> {
+  public async update(request: TaskRequestDto): Promise<void> {
     await this.clientRepository.get(this.getParams(request));
-    return await this.clientRepository.update(this.updateParams(request));
+    await this.clientRepository.update(this.updateParams(request));
   }
 
   private getParams(request: TaskRequestDto): ClientTypes.DeleteItem {

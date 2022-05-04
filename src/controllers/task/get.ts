@@ -19,7 +19,7 @@ export class GetTaskController implements IController {
       }
       const request = converterToType(data, TaskRequestDto);
       const result = await this.getTaskService.get(request);
-      return HttpResponseCreator.success('Task successfully retrieved', { result })
+      return HttpResponseCreator.success('Task successfully retrieved', { result });
     } catch (error) {
       return HttpResponseCreator.serverError(error)
     }
