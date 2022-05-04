@@ -1,12 +1,12 @@
-import { IResponseBody } from "@protocols"
+import { IGenericType, IResponseBody } from "@protocols"
 import { StatusName } from "../helpers/status";
 
-export class SuccessData<T = any> implements IResponseBody {
+export class SuccessData implements IResponseBody {
   message: string;
   name: string;
-  data: T;
+  data: IGenericType<{}>;
 
-  constructor(message: string, data: T = undefined) {
+  constructor(message: string, data: IGenericType<{}>) {
     this.message = message;
     this.name = StatusName.Success;
     this.data = data

@@ -1,5 +1,7 @@
+import { IGenericType } from "@protocols";
+
 export interface IResponseBody {
   message: string;
   name: string;
-  data?: any;
+  data?: IGenericType<{}>;
 };

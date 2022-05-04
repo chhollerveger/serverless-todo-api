@@ -1,15 +1,15 @@
 import { SuccessData } from "@presentation";
-import { HttpResponse, makeHttpResponseHeaders } from "@protocols"
+import { HttpResponse, IGenericType, makeHttpResponseHeaders } from "@protocols"
 import { BadRequestError } from "../response/bad-request-error";
 import { ServerError } from "../response/server-error";
 import { StatusCode } from "./status";
 
 export class HttpResponseCreator {
 
-  public static success = (data: SuccessData): HttpResponse => ({
+  public static success = (message: string, data: IGenericType<{}> = undefined): HttpResponse => ({
     statusCode: StatusCode.Success,
     headers: makeHttpResponseHeaders(),
-    body: data
+    body: new SuccessData(message, data)
   });
 
   public static badRequest = (error: BadRequestError): HttpResponse => ({
