@@ -1,7 +1,7 @@
 import type { AWS } from '@serverless/typescript';
 
-const handlerListPath = `dist/src/handlers/list`;
-const handlerTaskPath = `dist/src/handlers/task`;
+const handlerListPath = `src/handlers/list`;
+const handlerTaskPath = `src/handlers/task`;
 
 export const makeFunctions = (): AWS['functions'] => {
   return {
