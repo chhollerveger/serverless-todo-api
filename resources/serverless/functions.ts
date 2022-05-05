@@ -1,9 +1,12 @@
 import type { AWS } from '@serverless/typescript';
 
+const handlerListPath = `dist/src/handlers/list`;
+const handlerTaskPath = `dist/src/handlers/task`;
+
 export const makeFunctions = (): AWS['functions'] => {
   return {
     createList: {
-      handler: 'src.handlers.list.create.handler',
+      handler: `${handlerListPath}/create.handler`,
       events: [
         {
           http: {
@@ -15,7 +18,7 @@ export const makeFunctions = (): AWS['functions'] => {
       ]
     },
     deleteList: {
-      handler: 'src.handlers.list.delete.handler',
+      handler: `${handlerListPath}/delete.handler`,
       events: [
         {
           http: {
@@ -36,7 +39,7 @@ export const makeFunctions = (): AWS['functions'] => {
       ]
     },
     getList: {
-      handler: 'src.handlers.list.get.handler',
+      handler: `${handlerListPath}/get.handler`,
       events: [
         {
           http: {
@@ -57,7 +60,7 @@ export const makeFunctions = (): AWS['functions'] => {
       ]
     },
     updateList: {
-      handler: 'src.handlers.list.update.handler',
+      handler: `${handlerListPath}/update.handler`,
       events: [
         {
           http: {
@@ -78,7 +81,7 @@ export const makeFunctions = (): AWS['functions'] => {
       ]
     },
     createTask: {
-      handler: 'src.handlers.task.create.handler',
+      handler: `${handlerTaskPath}/create.handler`,
       events: [
         {
           http: {
@@ -90,7 +93,7 @@ export const makeFunctions = (): AWS['functions'] => {
       ]
     },
     updateTask: {
-      handler: 'src.handlers.task.update.handler',
+      handler: `${handlerTaskPath}/update.handler`,
       events: [
         {
           http: {
@@ -111,7 +114,7 @@ export const makeFunctions = (): AWS['functions'] => {
       ]
     },
     deleteTask: {
-      handler: 'src.handlers.task.delete.handler',
+      handler: `${handlerTaskPath}/delete.handler`,
       events: [
         {
           http: {
@@ -135,7 +138,7 @@ export const makeFunctions = (): AWS['functions'] => {
       ]
     },
     getTask: {
-      handler: 'src.handlers.task.get.handler',
+      handler: `${handlerTaskPath}/get.handler`,
       events: [
         {
           http: {
