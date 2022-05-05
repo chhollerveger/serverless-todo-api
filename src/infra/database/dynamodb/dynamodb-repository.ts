@@ -1,12 +1,9 @@
 import * as AWS from 'aws-sdk';
-import { makeAwsConfig } from './config/aws-config';
 import { ClientTypes, IDynamoDbRepository } from '@protocols';
 import { ServerError } from '@presentation';
 
 export class DynamoDbRepository implements IDynamoDbRepository {
-  constructor(private documentClient: AWS.DynamoDB.DocumentClient) {
-    makeAwsConfig();
-  }
+  constructor(private documentClient: AWS.DynamoDB.DocumentClient) { }
 
   public async create(params: ClientTypes.PutItem): Promise<ClientTypes.PutItemOutput> {
     try {
