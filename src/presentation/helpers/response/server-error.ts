@@ -7,7 +7,8 @@ export class ServerError implements IResponseBody {
   name: string;
   message: string;
 
-  constructor(message: string) {
+  constructor(message: string, data: IGenericType<{}> = undefined) {
+    this.data = data;
     this.name = StatusName.ServerError;
     this.message = message
   }
