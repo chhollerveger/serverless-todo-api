@@ -34,9 +34,8 @@ const serverlessConfiguration: AWS = {
     },
     ['serverless-offline']: {
       httpPort: 3000,
-      babelOptions: {
-        presets: ["env"]
-      }
+      websocketPort: 3001,
+      lambdaPort: 3002
     }
   },
   plugins: [
