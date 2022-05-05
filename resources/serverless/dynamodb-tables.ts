@@ -4,9 +4,9 @@ export const makeDynamoDbTables = (): AWS['resources']['Resources'] => {
   return {
     ListTable: {
       Type: 'AWS::DynamoDB::Table',
+      DeletionPolicy: 'Retain',
       Properties: {
         TableName: '${self:provider.environment.LIST_TABLE}',
-        DeletionPolicy: 'Retain',
         AttributeDefinitions: [
           { AttributeName: 'id', AttributeType: 'S' }
         ],
