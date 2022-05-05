@@ -11,6 +11,7 @@
     "sourceMap": true,
     "target": "es2017",
     "baseUrl": ".",
+    "outDir": "./dist",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "types": [
@@ -28,6 +29,7 @@
     ".vscode/**/*",
     ".vscode/**/*",
     ".esbuild/**/*",
+    "dist/**/*",
     "tests/**/*",
     "**/**/*.test.ts"
   ],
