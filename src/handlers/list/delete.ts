@@ -3,5 +3,5 @@ import { makeDeleteListController } from "@factories";
 
 export const handler: APIGatewayProxyHandler = (event: APIGatewayEvent, _context: Context): Promise<APIGatewayProxyResult> => {
   const controller = makeDeleteListController();
-  return controller.handle(event.body);
+  return controller.handle(event.pathParameters);
 }
