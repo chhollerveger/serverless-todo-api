@@ -18,11 +18,6 @@ const serverlessConfiguration: AWS = {
     stage: '${opt:stage, self:provider.stage}',
     list_table: '${self:service}-list-table-${opt:stage, self:provider.stage}',
     tasks_table: '${self:service}-tasks-table-${opt:stage, self:provider.stage}',
-    table_throughputs: {
-      prod: 5,
-      default: 1,
-    },
-    table_throughput: '${self:custom.table_throughputs.${self:custom.stage}, self:custom.table_throughputs.default}',
     dynamodb: {
       stages: ['dev'],
       start: {

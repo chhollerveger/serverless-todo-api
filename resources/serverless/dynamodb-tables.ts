@@ -14,8 +14,8 @@ export const makeDynamoDbTables = (): AWS['resources']['Resources'] => {
           { AttributeName: 'id', KeyType: 'HASH' }
         ],
         ProvisionedThroughput: {
-          ReadCapacityUnits: '${self:custom.TABLE_THROUGHPUT}',
-          WriteCapacityUnits: '${self:custom.TABLE_THROUGHPUT}'
+          ReadCapacityUnits: 2,
+          WriteCapacityUnits: 2
         }
       }
     },
@@ -33,8 +33,8 @@ export const makeDynamoDbTables = (): AWS['resources']['Resources'] => {
           { AttributeName: 'listId', KeyType: 'RANGE' }
         ],
         ProvisionedThroughput: {
-          ReadCapacityUnits: '${self:custom.TABLE_THROUGHPUT}',
-          WriteCapacityUnits: '${self:custom.TABLE_THROUGHPUT}'
+          ReadCapacityUnits: 2,
+          WriteCapacityUnits: 2
         },
         GlobalSecondaryIndexes: [
           {
@@ -46,8 +46,8 @@ export const makeDynamoDbTables = (): AWS['resources']['Resources'] => {
               ProjectionType: 'ALL'
             },
             ProvisionedThroughput: {
-              ReadCapacityUnits: '${self:custom.table_throughput}',
-              WriteCapacityUnits: '${self:custom.table_throughput}'
+              ReadCapacityUnits: 2,
+              WriteCapacityUnits: 2
             },
           }
         ]
