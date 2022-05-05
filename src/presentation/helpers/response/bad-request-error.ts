@@ -6,6 +6,7 @@ export class BadRequestError extends Error implements IResponseBody {
   data: IGenericType<{}>;
   constructor(message: string, data: IGenericType<{}>) {
     super(message);
+    this.message = message;
     this.name = StatusName.BadRequest;
     this.data = data;
   }

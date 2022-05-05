@@ -13,7 +13,7 @@
         "--inspect-brk=5858"
       ],
       "outFiles": [
-        "${workspaceFolder}/build/**/*.js"
+        "${workspaceFolder}/.esbuild/**/*.js"
       ],
       "port": 5858,
       "sourceMaps": true,
