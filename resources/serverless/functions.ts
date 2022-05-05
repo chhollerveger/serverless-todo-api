@@ -23,11 +23,11 @@ export const makeFunctions = (): AWS['functions'] => {
         {
           http: {
             method: 'DELETE',
-            path: 'list',
+            path: 'list/{listId}',
             cors: true,
             request: {
               parameters: {
-                querystrings: {
+                paths: {
                   listId: {
                     required: true
                   }
@@ -44,11 +44,11 @@ export const makeFunctions = (): AWS['functions'] => {
         {
           http: {
             method: 'GET',
-            path: 'list',
+            path: 'list/{listId}',
             cors: true,
             request: {
               parameters: {
-                querystrings: {
+                paths: {
                   listId: {
                     required: true
                   }
@@ -65,11 +65,11 @@ export const makeFunctions = (): AWS['functions'] => {
         {
           http: {
             method: 'UPDATE',
-            path: 'list',
+            path: 'list/{listId}',
             cors: true,
             request: {
               parameters: {
-                querystrings: {
+                paths: {
                   listId: {
                     required: true
                   }
@@ -98,11 +98,11 @@ export const makeFunctions = (): AWS['functions'] => {
         {
           http: {
             method: 'UPDATE',
-            path: 'task',
+            path: 'task/{taskId}',
             cors: true,
             request: {
               parameters: {
-                querystrings: {
+                paths: {
                   taskId: {
                     required: true
                   }
@@ -119,11 +119,11 @@ export const makeFunctions = (): AWS['functions'] => {
         {
           http: {
             method: 'DELETE',
-            path: 'task',
+            path: 'task/{taskId}/{listId}',
             cors: true,
             request: {
               parameters: {
-                querystrings: {
+                paths: {
                   taskId: {
                     required: true
                   },
@@ -143,11 +143,11 @@ export const makeFunctions = (): AWS['functions'] => {
         {
           http: {
             method: 'GET',
-            path: 'task',
+            path: 'task/{taskId}/{listId}',
             cors: true,
             request: {
               parameters: {
-                querystrings: {
+                paths: {
                   taskId: {
                     required: true
                   },
