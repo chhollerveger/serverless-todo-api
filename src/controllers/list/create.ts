@@ -11,13 +11,13 @@ export class CreateListController implements IController {
     private createListService: ICreateListService,
   ) { }
 
-  public async handle(data: any): Promise<HttpResponse> {
+  public async handle(body: string): Promise<HttpResponse> {
     try {
-      const error = this.validator.validateAgainstConstraints(data, createListConstraint());
+      const request = converterToType(body, ListRequestDto);
+      const error = this.validator.validateAgainstConstraints(request, createListConstraint());
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, ListRequestDto);
       const listId = await this.createListService.create(request);
       return HttpResponseCreator.success('To-do list successfully created', { listId });
     } catch (error) {
