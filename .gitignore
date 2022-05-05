@@ -1,5 +1,6 @@
 /node_modules
 /build
+/.esbuild
 /.serverless
 /.dynamodb
 /package-lock.json
