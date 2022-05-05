@@ -64,7 +64,7 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'UPDATE',
+            method: 'PUT',
             path: 'list/{listId}',
             cors: true,
             request: {
@@ -97,7 +97,7 @@ export const makeFunctions = (): AWS['functions'] => {
       events: [
         {
           http: {
-            method: 'UPDATE',
+            method: 'PUT',
             path: 'task/{taskId}',
             cors: true,
             request: {
