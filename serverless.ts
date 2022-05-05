@@ -61,6 +61,7 @@ const serverlessConfiguration: AWS = {
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
       REGION: '${self:custom.region}',
       STAGE: '${self:custom.stage}',
+      DYNAMO_ENDPOINT: '${env:DYNAMO_ENDPOINT, "http://localhost:8000"}',
       LIST_TABLE: '${self:custom.list_table}',
       TASKS_TABLE: '${self:custom.tasks_table}',
     },
