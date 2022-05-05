@@ -22,11 +22,11 @@ const serverlessConfiguration: AWS = {
       prod: 5,
       default: 1,
     },
-    table_throughput: '${self:custom.TABLE_THROUGHPUTS.${self:custom.stage}, self:custom.table_throughputs.default}',
+    table_throughput: '${self:custom.table_throughputs.${self:custom.stage}, self:custom.table_throughputs.default}',
     dynamodb: {
       stages: ['dev'],
       start: {
-        port: 8008,
+        port: 8000,
         inMemory: true,
         heapInitial: '200m',
         heapMax: '1g',
@@ -56,7 +56,7 @@ const serverlessConfiguration: AWS = {
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
-    stage: 'dev',
+    stage: '${env:ENV}, dev',
     region: 'sa-east-1',
     apiGateway: {
       minimumCompressionSize: 1024,

@@ -1,0 +1,1 @@
+{"version":3,"file":"delete.js","sourceRoot":"","sources":["../../../src/handlers/task/delete.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,wBAAwB,EAAE,MAAM,YAAY,CAAC;AAEtD,MAAM,CAAC,MAAM,OAAO,GAA2B,CAAC,KAAsB,EAAE,QAAiB,EAAkC,EAAE;IAC3H,MAAM,UAAU,GAAG,wBAAwB,EAAE,CAAC;IAC9C,OAAO,UAAU,CAAC,MAAM,CAAC,KAAK,CAAC,cAAc,CAAC,CAAC;AACjD,CAAC,CAAA"}
