@@ -4,7 +4,7 @@ import { BadRequestError } from '@presentation';
 
 export class Validator implements IValidator {
 
-  public validateAgainstConstraints(values: IGenericType<string>, constraints: IGenericType<object>): void | BadRequestError {
+  public validateAgainstConstraints<T>(values: T, constraints: IGenericType<object>): void | BadRequestError {
     const validation = validate(values, constraints);
     if (typeof validation !== 'undefined') {
       return new BadRequestError('required fields are missing', { validation })
