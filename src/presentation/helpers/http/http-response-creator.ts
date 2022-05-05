@@ -1,5 +1,6 @@
 import { SuccessData } from "@presentation";
 import { IGenericType } from "@protocols";
+import { BadRequestError } from "../response/bad-request-error";
 import { ServerError } from "../response/server-error";
 import { makeHttpResponseHeaders } from "./header";
 import { HttpResponse } from "./response";
@@ -13,16 +14,16 @@ export class HttpResponseCreator {
     body: JSON.stringify(new SuccessData(message, data))
   });
 
-  public static badRequest = (error: Error): HttpResponse => ({
+  public static badRequest = (error: BadRequestError): HttpResponse => ({
     statusCode: StatusCode.BadRequest,
     headers: makeHttpResponseHeaders(),
     body: JSON.stringify(error)
   });
 
-  public static serverError = (error: Error): HttpResponse => ({
+  public static serverError = (error: ServerError): HttpResponse => ({
     statusCode: StatusCode.ServerError,
     headers: makeHttpResponseHeaders(),
-    body: JSON.stringify((error instanceof ServerError) ? error : new ServerError('Internal server error', error.stack))
+    body: JSON.stringify((error instanceof ServerError) ? error : new ServerError('Internal server error'))
   });
 }
 

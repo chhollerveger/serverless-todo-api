@@ -10,7 +10,6 @@
     "noUnusedParameters": true,
     "sourceMap": true,
     "target": "es2017",
-    "outDir": "./build",
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -28,7 +27,7 @@
     "_warmup/**/*",
     ".vscode/**/*",
     ".vscode/**/*",
-    "dist/**/*",
+    ".esbuild/**/*",
     "tests/**/*",
     "**/**/*.test.ts"
   ],
