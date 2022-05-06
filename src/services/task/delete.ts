@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IDeleteTaskService, TaskRequestDto } from "@protocols";
+import { ClientTypesAdapter, IClientRepository, IDeleteTaskService, TaskRequestDto } from "@protocols";
 
 export class DeleteTaskService implements IDeleteTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;
@@ -10,7 +10,7 @@ export class DeleteTaskService implements IDeleteTaskService {
     await this.clientRepository.delete(this.params(request));
   }
 
-  private params(request: TaskRequestDto): ClientTypes.GetItem | ClientTypes.DeleteItem {
+  private params(request: TaskRequestDto): ClientTypesAdapter.GetItem | ClientTypesAdapter.DeleteItem {
     return {
       TableName: this.taskTableName,
       Key: {

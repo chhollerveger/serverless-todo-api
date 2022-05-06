@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IDeleteListService, ListRequestDto } from "@protocols";
+import { ClientTypesAdapter, IClientRepository, IDeleteListService, ListRequestDto } from "@protocols";
 
 export class DeleteListService implements IDeleteListService {
   private readonly listTableName = process.env.LIST_TABLE;
@@ -15,14 +15,14 @@ export class DeleteListService implements IDeleteListService {
     await this.deleteTasks(tasks);
   }
 
-  private params(request: ListRequestDto): ClientTypes.DeleteItem {
+  private params(request: ListRequestDto): ClientTypesAdapter.DeleteItem {
     return {
       TableName: this.listTableName,
       Key: { id: request.listId },
     };
   }
 
-  private queryTasksParams(request: ListRequestDto): ClientTypes.QueryItem {
+  private queryTasksParams(request: ListRequestDto): ClientTypesAdapter.QueryItem {
     return {
       TableName: this.taskTableName,
       IndexName: this.listIndexName,
@@ -33,7 +33,7 @@ export class DeleteListService implements IDeleteListService {
     };
   }
 
-  private async deleteTasks(tasks: ClientTypes.QueryItemOutput): Promise<void> {
+  private async deleteTasks(tasks: ClientTypesAdapter.QueryItemOutput): Promise<void> {
     if (tasks?.Items?.length > 0) {
       const taskEntities = tasks.Items.map((item) => this.batchWriteRequestParams(item));
       if (taskEntities.length > this.chunkSize) {
@@ -46,7 +46,7 @@ export class DeleteListService implements IDeleteListService {
     }
   }
 
-  private batchWriteRequestParams(item: ClientTypes.AttributeMap): ClientTypes.BatchWriteRequest {
+  private batchWriteRequestParams(item: ClientTypesAdapter.AttributeMap): ClientTypesAdapter.BatchWriteRequest {
     return {
       DeleteRequest: {
         Key: {
@@ -56,8 +56,8 @@ export class DeleteListService implements IDeleteListService {
     };
   }
 
-  private createChunks(data: ClientTypes.BatchWriteRequests, chunkSize: number): ClientTypes.BatchWriteRequests[] {
-    const chunks: ClientTypes.BatchWriteRequests[] = [];
+  private createChunks(data: ClientTypesAdapter.BatchWriteRequests, chunkSize: number): ClientTypesAdapter.BatchWriteRequests[] {
+    const chunks: ClientTypesAdapter.BatchWriteRequests[] = [];
     let batchIterator = 0;
     while (batchIterator < data.length) {
       chunks.push(data.slice(batchIterator, (batchIterator += chunkSize)));
@@ -65,7 +65,7 @@ export class DeleteListService implements IDeleteListService {
     return chunks;
   }
 
-  private batchWriteItemInputParams(items: ClientTypes.BatchWriteRequests): ClientTypes.BatchWrite {
+  private batchWriteItemInputParams(items: ClientTypesAdapter.BatchWriteRequests): ClientTypesAdapter.BatchWrite {
     return {
       RequestItems: {
         [this.taskTableName]: items,

@@ -1,6 +1,6 @@
 const { REGION, DYNAMO_ENDPOINT } = process.env;
 
-export const makeAwsConfig = () => ({
+export const makeAwsConfigure = () => ({
   endpoint: DYNAMO_ENDPOINT,
   region: REGION,
 });

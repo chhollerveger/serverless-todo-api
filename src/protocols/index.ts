@@ -1,6 +1,5 @@
-export { IClientRepository } from './database/client-repository';
-export { IDynamoDbRepository } from './database/dynamodb/dynamodb-repository';
-export * as ClientTypes from './database/client-types';
+export { IClientRepository } from './infra/database/client-repository';
+export * as ClientTypesAdapter from './infra/database/adapters/client-types-adapter';
 export { ListRequestDto } from './dtos/requests/list-request-dto';
 export { TaskRequestDto } from './dtos/requests/task-request-dto';
 export { IListResponseDto } from './dtos/responses/list-response-dto';

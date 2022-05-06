@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IGetListService, IListResponseDto, ListRequestDto } from "@protocols";
+import { ClientTypesAdapter, IClientRepository, IGetListService, IListResponseDto, ListRequestDto } from "@protocols";
 
 export class GetListService implements IGetListService {
   private readonly listTableName = process.env.LIST_TABLE;
@@ -13,14 +13,14 @@ export class GetListService implements IGetListService {
     return this.formatData(listData, tasksData);
   }
 
-  private getParams(request: ListRequestDto): ClientTypes.DeleteItem {
+  private getParams(request: ListRequestDto): ClientTypesAdapter.DeleteItem {
     return {
       TableName: this.listTableName,
       Key: { id: request.listId },
     };
   }
 
-  private queryParams(request: ListRequestDto): ClientTypes.QueryItem {
+  private queryParams(request: ListRequestDto): ClientTypesAdapter.QueryItem {
     return {
       TableName: this.taskTableName,
       IndexName: this.listIndexName,
@@ -31,7 +31,7 @@ export class GetListService implements IGetListService {
     };
   }
 
-  private formatData(listData: ClientTypes.GetItemOutput, tasksData: ClientTypes.QueryItemOutput): IListResponseDto {
+  private formatData(listData: ClientTypesAdapter.GetItemOutput, tasksData: ClientTypesAdapter.QueryItemOutput): IListResponseDto {
     return {
       id: listData.Item.id,
       name: listData.Item.name,

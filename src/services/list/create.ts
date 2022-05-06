@@ -1,5 +1,5 @@
 import { ListModel } from "@models";
-import { ClientTypes, ICreateListService, IClientRepository, ListRequestDto } from "@protocols";
+import { ClientTypesAdapter, ICreateListService, IClientRepository, ListRequestDto } from "@protocols";
 
 export class CreateListService implements ICreateListService {
   private readonly tableName = process.env.LIST_TABLE;
@@ -12,7 +12,7 @@ export class CreateListService implements ICreateListService {
     return data.id;
   }
 
-  private params(data: ListModel): ClientTypes.PutItem {
+  private params(data: ListModel): ClientTypesAdapter.PutItem {
     return {
       TableName: this.tableName,
       Item: {

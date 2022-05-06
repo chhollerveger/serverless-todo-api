@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IGetTaskService, ITaskResponseDto, TaskRequestDto } from "@protocols";
+import { ClientTypesAdapter, IClientRepository, IGetTaskService, ITaskResponseDto, TaskRequestDto } from "@protocols";
 
 export class GetTaskService implements IGetTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;
@@ -10,7 +10,7 @@ export class GetTaskService implements IGetTaskService {
     return this.formatData(data);
   }
 
-  private params(request: TaskRequestDto): ClientTypes.GetItem | ClientTypes.DeleteItem {
+  private params(request: TaskRequestDto): ClientTypesAdapter.GetItem | ClientTypesAdapter.DeleteItem {
     return {
       TableName: this.taskTableName,
       Key: {
@@ -20,7 +20,7 @@ export class GetTaskService implements IGetTaskService {
     };
   }
 
-  private formatData(data: ClientTypes.GetItemOutput): ITaskResponseDto {
+  private formatData(data: ClientTypesAdapter.GetItemOutput): ITaskResponseDto {
     return {
       id: data.Item.id,
       listId: data.Item.listId,

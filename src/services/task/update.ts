@@ -1,4 +1,4 @@
-import { ClientTypes, IClientRepository, IUpdateTaskService, TaskRequestDto } from "@protocols";
+import { ClientTypesAdapter, IClientRepository, IUpdateTaskService, TaskRequestDto } from "@protocols";
 
 export class UpdateTaskService implements IUpdateTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;
@@ -11,14 +11,14 @@ export class UpdateTaskService implements IUpdateTaskService {
     await this.clientRepository.update(this.updateParams(request));
   }
 
-  private getParams(request: TaskRequestDto): ClientTypes.DeleteItem {
+  private getParams(request: TaskRequestDto): ClientTypesAdapter.DeleteItem {
     return {
       TableName: this.listTableName,
       Key: { id: request.listId },
     };
   }
 
-  private updateParams(request: TaskRequestDto): ClientTypes.UpdateItem {
+  private updateParams(request: TaskRequestDto): ClientTypesAdapter.UpdateItem {
     const { listId, taskId, completed, description } = request;
     const isCompletedPresent = typeof completed !== 'undefined';
 
@@ -42,7 +42,7 @@ export class UpdateTaskService implements IUpdateTaskService {
   }
 
   private setExpressionAttributeValues(description: string, isCompletedPresent: boolean, completed: boolean) {
-    const expressionAttributeValues: ClientTypes.ExpressionAttributeValue = { ":timestamp": new Date().getTime() };
+    const expressionAttributeValues: ClientTypesAdapter.ExpressionAttributeValue = { ":timestamp": new Date().getTime() };
     if (description) {
       expressionAttributeValues[':description'] = description
     }

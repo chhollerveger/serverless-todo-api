@@ -1,5 +1,5 @@
 import { TaskModel } from "@models";
-import { ClientTypes, IClientRepository, ICreateTaskService, TaskRequestDto } from "@protocols";
+import { ClientTypesAdapter, IClientRepository, ICreateTaskService, TaskRequestDto } from "@protocols";
 
 export class CreateTaskService implements ICreateTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;
@@ -14,14 +14,14 @@ export class CreateTaskService implements ICreateTaskService {
     return data.id;
   }
 
-  private getParams(request: TaskRequestDto): ClientTypes.DeleteItem {
+  private getParams(request: TaskRequestDto): ClientTypesAdapter.DeleteItem {
     return {
       TableName: this.listTableName,
       Key: { id: request.listId },
     };
   }
 
-  private createParams(data: TaskModel): ClientTypes.PutItem {
+  private createParams(data: TaskModel): ClientTypesAdapter.PutItem {
     return {
       TableName: this.taskTableName,
       Item: {

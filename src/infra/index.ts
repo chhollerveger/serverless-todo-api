@@ -1,2 +1,2 @@
-export { DynamoDbRepository } from './database/dynamodb/dynamodb-repository';
-export { makeAwsConfig } from './database/dynamodb/config/aws-configure';
+export { DynamoDbRepositoryAdapter } from './database/adapters/dynamodb/dynamodb-repository-adapter';
+export { makeAwsConfigure } from './database/adapters/dynamodb/aws-configure';
