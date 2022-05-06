@@ -1,13 +1,13 @@
 export const createTaskConstraint = () => {
   return {
     "listId": {
-      "presença": {
+      "presence": {
         "allowEmpty": false
       },
       "type": "string"
     },
     "description": {
-      "presença": {
+      "presence": {
         "allowEmpty": false
       },
       "type": "string"

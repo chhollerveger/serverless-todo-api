@@ -10,13 +10,13 @@ export class DeleteListController implements IController {
     private deleteListService: IDeleteListService,
   ) { }
 
-  public async handle(data: any): Promise<HttpResponse> {
+  public async handle(params: string): Promise<HttpResponse> {
     try {
-      const error = this.validator.validateAgainstConstraints(data, getListConstraint());
+      const request = converterToType(params, ListRequestDto);
+      const error = this.validator.validateAgainstConstraints(request, getListConstraint());
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, ListRequestDto);
       await this.deleteListService.delete(request);
       return HttpResponseCreator.success('To-do list successfully deleted');
     } catch (error) {

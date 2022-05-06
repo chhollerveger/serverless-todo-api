@@ -6,5 +6,5 @@ export const deleteListConstraint = () => {
       },
       "type": "string"
     }
-  };
+  }
 }

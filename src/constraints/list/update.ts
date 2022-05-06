@@ -1,13 +1,13 @@
 export const updateListConstraint = () => {
   return {
     "listId": {
-      "presença": {
+      "presence": {
         "allowEmpty": false
       },
       "type": "string"
     },
     "name": {
-      "presença": {
+      "presence": {
         "allowEmpty": false
       },
       "type": "string"
