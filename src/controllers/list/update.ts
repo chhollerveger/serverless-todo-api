@@ -11,13 +11,13 @@ export class UpdateListController implements IController {
     private updateListService: IUpdateListService,
   ) { }
 
-  public async handle(data: any): Promise<HttpResponse> {
+  public async handle(body: string, params: ListRequestDto): Promise<HttpResponse> {
     try {
-      const error = this.validator.validateAgainstConstraints(data, updateListConstraint());
+      const request = converterToType(body, ListRequestDto, params);
+      const error = this.validator.validateAgainstConstraints(request, updateListConstraint());
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, ListRequestDto);
       await this.updateListService.update(request);
       return HttpResponseCreator.success('To-do list successfully updated');
     } catch (error) {
