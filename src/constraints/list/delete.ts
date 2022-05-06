@@ -1,7 +1,7 @@
 export const deleteListConstraint = () => {
   return {
     "listId": {
-      "presença": {
+      "presence": {
         "allowEmpty": false
       },
       "type": "string"

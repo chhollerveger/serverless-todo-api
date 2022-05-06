@@ -1,7 +1,7 @@
 export const getListConstraint = () => {
   return {
     "listId": {
-      "presença": {
+      "presence": {
         "allowEmpty": false
       },
       "type": "string"
