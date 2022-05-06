@@ -1,7 +1,6 @@
 import 'source-map-support/register';
 import { IController, IGetListService, IValidator, ListRequestDto } from '@protocols';
 import { getListConstraint } from '@constraints';
-import { converterToType } from '@utils';
 import { HttpResponse, HttpResponseCreator } from '@presentation';
 
 export class GetListController implements IController {
@@ -10,15 +9,14 @@ export class GetListController implements IController {
     private getListService: IGetListService,
   ) { }
 
-  public async handle(data: any): Promise<HttpResponse> {
+  public async handle(params: ListRequestDto): Promise<HttpResponse> {
     try {
-      const error = this.validator.validateAgainstConstraints(data, getListConstraint());
+      const error = this.validator.validateAgainstConstraints(params, getListConstraint());
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, ListRequestDto);
-      const result = await this.getListService.get(request);
-      return HttpResponseCreator.success('To-do list successfully retrieved', { result });
+      const data = await this.getListService.get(params);
+      return HttpResponseCreator.success('To-do list successfully retrieved', { ...data });
     } catch (error) {
       return HttpResponseCreator.serverError(error)
     }
