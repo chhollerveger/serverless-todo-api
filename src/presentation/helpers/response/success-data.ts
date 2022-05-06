@@ -8,8 +8,8 @@ export class SuccessData implements IResponseBody {
   message: string;
 
   constructor(message: string, data: IGenericType<{}>) {
+    this.data = data
     this.message = message;
     this.name = StatusName.Success;
-    this.data = data
   }
 }
