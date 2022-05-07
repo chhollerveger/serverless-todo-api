@@ -42,11 +42,10 @@ export class DeleteListService implements IDeleteListService {
       const taskEntities = tasks.Items.map((item) => this.batchWriteRequestParams(item));
       if (taskEntities.length > this.chunkSize) {
         const taskChunks = this.createChunks(taskEntities, this.chunkSize);
-        Promise.all(taskChunks.map((tasks) => {
-          return this.clientRepository.batchCreate(this.batchWriteItemInputParams(tasks));
-        }))
+        Promise.all(taskChunks.map((chunks) => this.clientRepository.batchCreate(this.batchWriteItemInputParams(chunks))));
+      } else {
+        await this.clientRepository.batchCreate(this.batchWriteItemInputParams(taskEntities))
       }
-      await this.clientRepository.batchCreate(this.batchWriteItemInputParams(taskEntities))
     }
   }
 
@@ -54,7 +53,8 @@ export class DeleteListService implements IDeleteListService {
     return {
       DeleteRequest: {
         Key: {
-          id: item.id
+          "id": item.id,
+          "listId": item.listId
         }
       }
     };
