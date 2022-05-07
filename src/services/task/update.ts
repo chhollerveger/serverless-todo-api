@@ -1,20 +1,26 @@
+import { NotFoundError } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, IUpdateTaskService, TaskRequestDto } from "@protocols";
 
 export class UpdateTaskService implements IUpdateTaskService {
   private readonly taskTableName = process.env.TASKS_TABLE;
-  private readonly listTableName = process.env.LIST_TABLE;
 
   constructor(private clientRepository: IClientRepository) { }
 
   public async update(request: TaskRequestDto): Promise<void> {
-    await this.clientRepository.get(this.getParams(request));
+    const data = await this.clientRepository.get(this.getParams(request));
+    if (!data.Item) {
+      throw new NotFoundError('Task not found with given identifiers');
+    }
     await this.clientRepository.update(this.updateParams(request));
   }
 
   private getParams(request: TaskRequestDto): ClientTypesAdapter.DeleteItem {
     return {
-      TableName: this.listTableName,
-      Key: { id: request.listId },
+      TableName: this.taskTableName,
+      Key: {
+        "id": request.taskId,
+        "listId": request.listId
+      },
     };
   }
 

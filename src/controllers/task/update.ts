@@ -11,22 +11,22 @@ export class UpdateTaskController implements IController {
     private updateTaskService: IUpdateTaskService,
   ) { }
 
-  public async handle(data: any): Promise<HttpResponse> {
+  public async handle(body: string, params: TaskRequestDto): Promise<HttpResponse> {
     try {
-      const error = this.validator.validateAgainstConstraints(data, updateTaskConstraint());
+      const request = converterToType(body, TaskRequestDto, params);
+      const error = this.validator.validateAgainstConstraints(request, updateTaskConstraint());
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, TaskRequestDto);
       const isCompletedPresent = typeof request.completed !== 'undefined';
       if (!request.description && !isCompletedPresent) {
-        const present = `description, completed`;
-        return HttpResponseCreator.badRequest(new BadRequestError('Invalid request: at least one of them must be present.', { present }));
+        const present = `description or completed`;
+        throw new BadRequestError('Invalid request: at least one of them must be present.', { present });
       }
       await this.updateTaskService.update(request);
       return HttpResponseCreator.success('Task successfully updated');
     } catch (error) {
-      return HttpResponseCreator.serverError(error)
+      return HttpResponseCreator.handleException(error);
     }
   }
 }
