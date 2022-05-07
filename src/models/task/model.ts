@@ -7,7 +7,7 @@ export class TaskModel {
   constructor(
     private readonly _listId: string,
     private _description: string,
-    private _completed: boolean
+    private _completed: boolean = false
   ) {
     this._id = uuid();
     this._timestamp = new Date().getTime();

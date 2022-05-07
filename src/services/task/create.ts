@@ -1,4 +1,5 @@
 import { TaskModel } from "@models";
+import { NotFoundError } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, ICreateTaskService, TaskRequestDto } from "@protocols";
 
 export class CreateTaskService implements ICreateTaskService {
@@ -8,13 +9,16 @@ export class CreateTaskService implements ICreateTaskService {
   constructor(private clientRepository: IClientRepository) { }
 
   public async create(request: TaskRequestDto): Promise<string> {
-    await this.clientRepository.get(this.getParams(request));
-    const data = new TaskModel(request.listId, request.description, request.completed);
+    const listData = await this.clientRepository.get(this.getListParams(request));
+    if (!listData.Item) {
+      throw new NotFoundError('To-do list not found with given identifier');
+    }
+    const data = new TaskModel(request.listId, request.description);
     await this.clientRepository.create(this.createParams(data));
     return data.id;
   }
 
-  private getParams(request: TaskRequestDto): ClientTypesAdapter.DeleteItem {
+  private getListParams(request: TaskRequestDto): ClientTypesAdapter.DeleteItem {
     return {
       TableName: this.listTableName,
       Key: { id: request.listId },

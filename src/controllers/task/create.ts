@@ -11,17 +11,17 @@ export class CreateTaskController implements IController {
     private createTaskService: ICreateTaskService,
   ) { }
 
-  public async handle(data: any): Promise<HttpResponse> {
+  public async handle(data: string): Promise<HttpResponse> {
     try {
-      const error = this.validator.validateAgainstConstraints(data, createTaskConstraint());
+      const request = converterToType(data, TaskRequestDto);
+      const error = this.validator.validateAgainstConstraints(request, createTaskConstraint());
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
-      const request = converterToType(data, TaskRequestDto);
       const taskId = await this.createTaskService.create(request);
       return HttpResponseCreator.success('Task successfully added', { taskId });
     } catch (error) {
-      return HttpResponseCreator.serverError(error);
+      return HttpResponseCreator.handleException(error);
     }
   }
 }
