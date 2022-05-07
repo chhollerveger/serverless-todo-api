@@ -8,8 +8,5 @@ export const makeDeleteListController = (): IController => {
   const validator = new Validator();
   const clientRepository = makeClientRepository();
   const service = new DeleteListService(clientRepository);
-  return new DeleteListController(
-    validator,
-    service
-  );
+  return new DeleteListController(validator, service);
 }

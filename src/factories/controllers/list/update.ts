@@ -8,8 +8,5 @@ export const makeUpdateListController = (): IController => {
   const validator = new Validator();
   const clientRepository = makeClientRepository();
   const service = new UpdateListService(clientRepository);
-  return new UpdateListController(
-    validator,
-    service
-  );
+  return new UpdateListController(validator, service);
 }
