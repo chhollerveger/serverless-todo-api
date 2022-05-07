@@ -1,4 +1,4 @@
-import { NotFoundError } from "@presentation";
+import { NotFoundError, StatusMessage } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, IUpdateListService, ListRequestDto } from "@protocols";
 
 export class UpdateListService implements IUpdateListService {
@@ -9,7 +9,7 @@ export class UpdateListService implements IUpdateListService {
   public async update(request: ListRequestDto): Promise<void> {
     const data = await this.clientRepository.get(this.getParams(request));
     if (!data.Item) {
-      throw new NotFoundError('To-do list not found with given identifier');
+      throw new NotFoundError(StatusMessage.ToDoListNotFound);
     }
     await this.clientRepository.update(this.updateParams(request));
   }

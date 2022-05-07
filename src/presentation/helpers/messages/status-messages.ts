@@ -3,6 +3,7 @@ export enum StatusMessage {
   ToDoListDeleted = 'To-do list successfully deleted.',
   ToDoListFound = 'To-do list successfully retrieved.',
   ToDoListUpdated = 'To-do list successfully updated.',
+  ToDoListNotFound = 'To-do list not found with given identifier.',
   TaskAdded = 'Task successfully added.',
   TaskDeleted = 'Task successfully deleted.',
   TaskFound = 'Task successfully retrieved.',

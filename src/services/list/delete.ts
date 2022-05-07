@@ -1,4 +1,4 @@
-import { NotFoundError } from "@presentation";
+import { NotFoundError, StatusMessage } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, IDeleteListService, ListRequestDto } from "@protocols";
 
 export class DeleteListService implements IDeleteListService {
@@ -12,7 +12,7 @@ export class DeleteListService implements IDeleteListService {
   public async delete(request: ListRequestDto): Promise<void> {
     const data = await this.clientRepository.get(this.params(request));
     if (!data.Item) {
-      throw new NotFoundError('To-do list not found with given identifier');
+      throw new NotFoundError(StatusMessage.ToDoListNotFound);
     }
     await this.clientRepository.delete(this.params(request));
     const tasks = await this.clientRepository.query(this.queryTasksParams(request));
