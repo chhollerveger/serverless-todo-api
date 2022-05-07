@@ -2,7 +2,7 @@
 import 'source-map-support/register';
 import { IController, IDeleteTaskService, IValidator, TaskRequestDto } from '@protocols';
 import { deleteTaskConstraint } from '@constraints';
-import { HttpResponse, HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator, StatusMessage } from '@presentation';
 
 export class DeleteTaskController implements IController {
   constructor(
@@ -17,7 +17,7 @@ export class DeleteTaskController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       await this.deleteTaskService.delete(params);
-      return HttpResponseCreator.success('Task successfully deleted');
+      return HttpResponseCreator.success(StatusMessage.TaskDeleted);
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

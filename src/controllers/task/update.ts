@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import { IController, IUpdateTaskService, IValidator, TaskRequestDto } from '@protocols';
 import { updateTaskConstraint } from '@constraints';
 import { converterToType } from '@utils';
-import { BadRequestError, HttpResponse, HttpResponseCreator } from '@presentation';
+import { BadRequestError, HttpResponse, HttpResponseCreator, StatusMessage } from '@presentation';
 
 export class UpdateTaskController implements IController {
   constructor(
@@ -21,10 +21,10 @@ export class UpdateTaskController implements IController {
       const isCompletedPresent = typeof request.completed !== 'undefined';
       if (!request.description && !isCompletedPresent) {
         const present = `description or completed`;
-        throw new BadRequestError('Invalid request: at least one of them must be present.', { present });
+        throw new BadRequestError(StatusMessage.TaskInvalidRequest, { present });
       }
       await this.updateTaskService.update(request);
-      return HttpResponseCreator.success('Task successfully updated');
+      return HttpResponseCreator.success(StatusMessage.TaskUpdated);
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

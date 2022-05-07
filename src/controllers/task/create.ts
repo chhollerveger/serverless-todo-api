@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import { IController, ICreateTaskService, IValidator, TaskRequestDto } from '@protocols';
 import { createTaskConstraint } from '@constraints';
 import { converterToType } from '@utils';
-import { HttpResponse, HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator, StatusMessage } from '@presentation';
 
 export class CreateTaskController implements IController {
   constructor(
@@ -19,7 +19,7 @@ export class CreateTaskController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       const taskId = await this.createTaskService.create(request);
-      return HttpResponseCreator.success('Task successfully added', { taskId });
+      return HttpResponseCreator.success(StatusMessage.TaskAdded, { taskId });
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }
