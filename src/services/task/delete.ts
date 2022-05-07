@@ -1,4 +1,4 @@
-import { NotFoundError } from "@presentation";
+import { NotFoundError, StatusMessage } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, IDeleteTaskService, TaskRequestDto } from "@protocols";
 
 export class DeleteTaskService implements IDeleteTaskService {
@@ -9,7 +9,7 @@ export class DeleteTaskService implements IDeleteTaskService {
   public async delete(request: TaskRequestDto): Promise<void> {
     const data = await this.clientRepository.get(this.params(request));
     if (!data.Item) {
-      throw new NotFoundError('Task not found with given identifiers');
+      throw new NotFoundError(StatusMessage.TaskNotFound);
     }
     await this.clientRepository.delete(this.params(request));
   }

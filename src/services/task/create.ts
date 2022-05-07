@@ -1,5 +1,5 @@
 import { TaskModel } from "@models";
-import { BadRequestError } from "@presentation";
+import { BadRequestError, StatusMessage } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, ICreateTaskService, TaskRequestDto } from "@protocols";
 
 export class CreateTaskService implements ICreateTaskService {
@@ -11,7 +11,7 @@ export class CreateTaskService implements ICreateTaskService {
   public async create(request: TaskRequestDto): Promise<string> {
     const listData = await this.clientRepository.get(this.getListParams(request));
     if (!listData.Item) {
-      throw new BadRequestError('To-do list not found with given identifier');
+      throw new BadRequestError(StatusMessage.ToDoListNotFound);
     }
     const data = new TaskModel(request.listId, request.description);
     await this.clientRepository.create(this.createParams(data));

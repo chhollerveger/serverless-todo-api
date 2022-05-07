@@ -1,4 +1,4 @@
-import { NotFoundError } from "@presentation";
+import { NotFoundError, StatusMessage } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, IUpdateTaskService, TaskRequestDto } from "@protocols";
 
 export class UpdateTaskService implements IUpdateTaskService {
@@ -9,7 +9,7 @@ export class UpdateTaskService implements IUpdateTaskService {
   public async update(request: TaskRequestDto): Promise<void> {
     const data = await this.clientRepository.get(this.getParams(request));
     if (!data.Item) {
-      throw new NotFoundError('Task not found with given identifiers');
+      throw new NotFoundError(StatusMessage.TaskNotFound);
     }
     await this.clientRepository.update(this.updateParams(request));
   }
