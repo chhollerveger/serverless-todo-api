@@ -33,7 +33,7 @@ export class HttpResponseCreator {
     body: JSON.stringify((error instanceof ServerError) ? error : new ServerError('Internal server error'))
   });
 
-  public static handleException = (error: BadRequestError | ServerError | Error): HttpResponse => {
+  public static handleException = (error: NotFoundError | BadRequestError | ServerError | Error): HttpResponse => {
     const exception = (error instanceof NotFoundError) ? HttpResponseCreator.notFound(error)
       : (error instanceof BadRequestError) ? HttpResponseCreator.badRequest(error)
         : HttpResponseCreator.serverError(error);
