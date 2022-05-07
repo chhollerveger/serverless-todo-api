@@ -21,7 +21,7 @@ export class CreateListController implements IController {
       const listId = await this.createListService.create(request);
       return HttpResponseCreator.success('To-do list successfully created', { listId });
     } catch (error) {
-      return HttpResponseCreator.serverError(error);
+      return HttpResponseCreator.handleException(error);
     }
   }
 }

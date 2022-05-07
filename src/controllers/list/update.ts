@@ -21,7 +21,7 @@ export class UpdateListController implements IController {
       await this.updateListService.update(request);
       return HttpResponseCreator.success('To-do list successfully updated');
     } catch (error) {
-      return HttpResponseCreator.serverError(error);
+      return HttpResponseCreator.handleException(error);
     }
   }
 }
