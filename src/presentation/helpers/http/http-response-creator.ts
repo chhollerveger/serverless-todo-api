@@ -20,11 +20,16 @@ export class HttpResponseCreator {
     body: JSON.stringify(error)
   });
 
-  public static serverError = (error: ServerError): HttpResponse => ({
+  public static serverError = (error: ServerError | Error): HttpResponse => ({
     statusCode: StatusCode.ServerError,
     headers: makeHttpResponseHeaders(),
     body: JSON.stringify((error instanceof ServerError) ? error : new ServerError('Internal server error'))
   });
+
+  public static handleException = (error: BadRequestError | ServerError | Error): HttpResponse => {
+    const exception = (error instanceof BadRequestError) ? HttpResponseCreator.badRequest(error) : HttpResponseCreator.serverError(error);
+    return exception;
+  };
 }
 
 
