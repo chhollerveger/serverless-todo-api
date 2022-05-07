@@ -1,3 +1,4 @@
+import { NotFoundError } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, IGetTaskService, ITaskResponseDto, TaskRequestDto } from "@protocols";
 
 export class GetTaskService implements IGetTaskService {
@@ -7,6 +8,9 @@ export class GetTaskService implements IGetTaskService {
 
   public async get(request: TaskRequestDto): Promise<ITaskResponseDto> {
     const data = await this.clientRepository.get(this.params(request));
+    if (!data.Item) {
+      throw new NotFoundError('Task not found with given identifiers');
+    }
     return this.formatData(data);
   }
 
