@@ -48,7 +48,7 @@ export class GetListService implements IGetListService {
         completed: task.completed,
         createdAt: task.createdAt,
         updatedAt: task.updatedAt,
-      })) : []
+      })).sort((a, b) => a.createdAt - b.createdAt) : []
     }
   }
 }
