@@ -11,9 +11,9 @@ export class CreateTaskController implements IController {
     private createTaskService: ICreateTaskService,
   ) { }
 
-  public async handle(data: string): Promise<HttpResponse> {
+  public async handle(body: string): Promise<HttpResponse> {
     try {
-      const request = converterToType(data, TaskRequestDto);
+      const request = converterToType(body, TaskRequestDto);
       const error = this.validator.validateAgainstConstraints(request, createTaskConstraint());
       if (error) {
         return HttpResponseCreator.badRequest(error);
