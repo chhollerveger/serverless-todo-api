@@ -1,6 +1,7 @@
 import { SuccessData } from "@presentation";
 import { IGenericType } from "@protocols";
 import { BadRequestError } from "../response/bad-request-error";
+import { NotFoundError } from "../response/not-found-error";
 import { ServerError } from "../response/server-error";
 import { makeHttpResponseHeaders } from "./header";
 import { HttpResponse } from "./response";
@@ -20,6 +21,12 @@ export class HttpResponseCreator {
     body: JSON.stringify(error)
   });
 
+  public static notFound = (error: NotFoundError): HttpResponse => ({
+    statusCode: StatusCode.NotFound,
+    headers: makeHttpResponseHeaders(),
+    body: JSON.stringify(error)
+  });
+
   public static serverError = (error: ServerError | Error): HttpResponse => ({
     statusCode: StatusCode.ServerError,
     headers: makeHttpResponseHeaders(),
@@ -27,7 +34,9 @@ export class HttpResponseCreator {
   });
 
   public static handleException = (error: BadRequestError | ServerError | Error): HttpResponse => {
-    const exception = (error instanceof BadRequestError) ? HttpResponseCreator.badRequest(error) : HttpResponseCreator.serverError(error);
+    const exception = (error instanceof NotFoundError) ? HttpResponseCreator.notFound(error)
+      : (error instanceof BadRequestError) ? HttpResponseCreator.badRequest(error)
+        : HttpResponseCreator.serverError(error);
     return exception;
   };
 }
