@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import { IController, IUpdateListService, IValidator, ListRequestDto } from '@protocols';
 import { updateListConstraint } from '@constraints';
 import { converterToType } from '@utils';
-import { HttpResponse, HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator, StatusMessage } from '@presentation';
 
 export class UpdateListController implements IController {
   constructor(
@@ -19,7 +19,7 @@ export class UpdateListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       await this.updateListService.update(request);
-      return HttpResponseCreator.success('To-do list successfully updated');
+      return HttpResponseCreator.success(StatusMessage.ToDoListUpdated);
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

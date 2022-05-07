@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import { IController, ICreateListService, IValidator, ListRequestDto } from '@protocols';
 import { createListConstraint } from '@constraints';
 import { converterToType } from '@utils';
-import { HttpResponse, HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator, StatusMessage } from '@presentation';
 
 export class CreateListController implements IController {
   constructor(
@@ -19,7 +19,7 @@ export class CreateListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       const listId = await this.createListService.create(request);
-      return HttpResponseCreator.success('To-do list successfully created', { listId });
+      return HttpResponseCreator.success(StatusMessage.ToDoListCreated, { listId });
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

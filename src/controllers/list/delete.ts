@@ -1,7 +1,7 @@
 import 'source-map-support/register';
 import { IController, IDeleteListService, IValidator, ListRequestDto } from '@protocols';
 import { getListConstraint } from '@constraints';
-import { HttpResponse, HttpResponseCreator } from '@presentation';
+import { HttpResponse, HttpResponseCreator, StatusMessage } from '@presentation';
 
 export class DeleteListController implements IController {
   constructor(
@@ -16,7 +16,7 @@ export class DeleteListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       await this.deleteListService.delete(params);
-      return HttpResponseCreator.success('To-do list successfully deleted');
+      return HttpResponseCreator.success(StatusMessage.ToDoListDeleted);
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }
