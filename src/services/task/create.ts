@@ -1,5 +1,5 @@
 import { TaskModel } from "@models";
-import { BadRequestError, NotFoundError } from "@presentation";
+import { BadRequestError } from "@presentation";
 import { ClientTypesAdapter, IClientRepository, ICreateTaskService, TaskRequestDto } from "@protocols";
 
 export class CreateTaskService implements ICreateTaskService {
