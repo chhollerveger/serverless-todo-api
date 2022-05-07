@@ -8,8 +8,5 @@ export const makeDeleteTaskController = (): IController => {
   const validator = new Validator();
   const clientRepository = makeClientRepository();
   const service = new DeleteTaskService(clientRepository);
-  return new DeleteTaskController(
-    validator,
-    service
-  );
+  return new DeleteTaskController(validator, service);
 }
