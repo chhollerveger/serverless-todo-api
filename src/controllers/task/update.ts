@@ -21,7 +21,7 @@ export class UpdateTaskController implements IController {
       const isCompletedPresent = typeof request.completed !== 'undefined';
       if (!request.description && !isCompletedPresent) {
         const present = `description or completed`;
-        throw new BadRequestError(StatusMessage.TaskInvalidRequest, { present });
+        return HttpResponseCreator.badRequest(new BadRequestError(StatusMessage.TaskInvalidRequest, { present }));
       }
       await this.updateTaskService.update(request);
       return HttpResponseCreator.success(StatusMessage.TaskUpdated);
