@@ -1,4 +1,4 @@
-import { SuccessData } from "@presentation";
+import { Ok } from "@presentation";
 import { IGenericType } from "@protocols";
 import { BadRequestError } from "../response/bad-request-error";
 import { NotFoundError } from "../response/not-found-error";
@@ -12,7 +12,7 @@ export class HttpResponseCreator {
   public static ok = (message: string, data: IGenericType<{}> = undefined): HttpResponse => ({
     statusCode: StatusCode.Ok,
     headers: makeHttpResponseHeaders(),
-    body: JSON.stringify(new SuccessData(message, data))
+    body: JSON.stringify(new Ok(message, data))
   });
 
   public static badRequest = (error: BadRequestError): HttpResponse => ({

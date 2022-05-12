@@ -2,7 +2,7 @@ import { IGenericType } from "@protocols"
 import { IResponseBody } from "../http/body";
 import { StatusName } from "../http/status";
 
-export class SuccessData implements IResponseBody {
+export class Ok implements IResponseBody {
   data: IGenericType<{}>;
   name: string;
   message: string;
@@ -10,6 +10,6 @@ export class SuccessData implements IResponseBody {
   constructor(message: string, data: IGenericType<{}>) {
     this.data = data
     this.message = message;
-    this.name = StatusName.Success;
+    this.name = StatusName.Ok;
   }
 }
