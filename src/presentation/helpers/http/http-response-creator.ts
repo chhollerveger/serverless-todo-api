@@ -10,7 +10,7 @@ import { StatusCode } from "./status";
 export class HttpResponseCreator {
 
   public static success = (message: string, data: IGenericType<{}> = undefined): HttpResponse => ({
-    statusCode: StatusCode.Success,
+    statusCode: StatusCode.Ok,
     headers: makeHttpResponseHeaders(),
     body: JSON.stringify(new SuccessData(message, data))
   });

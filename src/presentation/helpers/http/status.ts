@@ -1,5 +1,5 @@
 export enum StatusCode {
-  Success = 200,
+  Ok = 200,
   Created = 201,
   BadRequest = 400,
   NotFound = 404,
@@ -7,7 +7,7 @@ export enum StatusCode {
 }
 
 export enum StatusName {
-  Success = 'Success',
+  Ok = 'Ok',
   Created = 'Created',
   BadRequest = 'Bad Request',
   NotFound = 'Not Found',
