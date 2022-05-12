@@ -1,6 +1,7 @@
 import { Ok } from "@presentation";
 import { IGenericType } from "@protocols";
 import { BadRequestError } from "../response/bad-request-error";
+import { Created } from "../response/created";
 import { NotFoundError } from "../response/not-found-error";
 import { ServerError } from "../response/server-error";
 import { makeHttpResponseHeaders } from "./header";
@@ -13,6 +14,12 @@ export class HttpResponseCreator {
     statusCode: StatusCode.Ok,
     headers: makeHttpResponseHeaders(),
     body: JSON.stringify(new Ok(message, data))
+  });
+
+  public static created = (message: string, data: IGenericType<{}> = undefined): HttpResponse => ({
+    statusCode: StatusCode.Created,
+    headers: makeHttpResponseHeaders(),
+    body: JSON.stringify(new Created(message, data))
   });
 
   public static badRequest = (error: BadRequestError): HttpResponse => ({
