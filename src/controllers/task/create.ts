@@ -19,7 +19,7 @@ export class CreateTaskController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       const taskId = await this.createTaskService.create(request);
-      return HttpResponseCreator.success(StatusMessage.TaskAdded, { taskId });
+      return HttpResponseCreator.ok(StatusMessage.TaskAdded, { taskId });
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

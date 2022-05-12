@@ -19,7 +19,7 @@ export class UpdateListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       await this.updateListService.update(request);
-      return HttpResponseCreator.success(StatusMessage.ToDoListUpdated);
+      return HttpResponseCreator.ok(StatusMessage.ToDoListUpdated);
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

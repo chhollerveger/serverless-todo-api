@@ -16,7 +16,7 @@ export class GetListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       const data = await this.getListService.get(params);
-      return HttpResponseCreator.success(StatusMessage.ToDoListFound, { ...data });
+      return HttpResponseCreator.ok(StatusMessage.ToDoListFound, { ...data });
     } catch (error) {
       return HttpResponseCreator.handleException(error)
     }

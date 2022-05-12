@@ -17,7 +17,7 @@ export class DeleteTaskController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       await this.deleteTaskService.delete(params);
-      return HttpResponseCreator.success(StatusMessage.TaskDeleted);
+      return HttpResponseCreator.ok(StatusMessage.TaskDeleted);
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

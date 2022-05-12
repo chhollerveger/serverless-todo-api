@@ -16,7 +16,7 @@ export class DeleteListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       await this.deleteListService.delete(params);
-      return HttpResponseCreator.success(StatusMessage.ToDoListDeleted);
+      return HttpResponseCreator.ok(StatusMessage.ToDoListDeleted);
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

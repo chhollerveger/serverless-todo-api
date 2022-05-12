@@ -19,7 +19,7 @@ export class CreateListController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       const listId = await this.createListService.create(request);
-      return HttpResponseCreator.success(StatusMessage.ToDoListCreated, { listId });
+      return HttpResponseCreator.ok(StatusMessage.ToDoListCreated, { listId });
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

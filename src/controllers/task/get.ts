@@ -17,7 +17,7 @@ export class GetTaskController implements IController {
         return HttpResponseCreator.badRequest(error);
       }
       const data = await this.getTaskService.get(params);
-      return HttpResponseCreator.success(StatusMessage.TaskFound, { ...data });
+      return HttpResponseCreator.ok(StatusMessage.TaskFound, { ...data });
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }

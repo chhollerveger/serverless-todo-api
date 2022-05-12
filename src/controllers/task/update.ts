@@ -24,7 +24,7 @@ export class UpdateTaskController implements IController {
         return HttpResponseCreator.badRequest(new BadRequestError(StatusMessage.TaskInvalidRequest, { present }));
       }
       await this.updateTaskService.update(request);
-      return HttpResponseCreator.success(StatusMessage.TaskUpdated);
+      return HttpResponseCreator.ok(StatusMessage.TaskUpdated);
     } catch (error) {
       return HttpResponseCreator.handleException(error);
     }
