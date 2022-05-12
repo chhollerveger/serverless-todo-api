@@ -4,6 +4,7 @@
     "lib": [
       "ESNext"
     ],
+    "module": "commonjs",
     "removeComments": true,
     "moduleResolution": "node",
     "noUnusedLocals": true,
@@ -19,7 +20,7 @@
     ]
   },
   "include": [
-    "src"
+    "src", "tests"
   ],
   "exclude": [
     "node_modules/**/*",
@@ -29,9 +30,7 @@
     ".vscode/**/*",
     ".vscode/**/*",
     ".esbuild/**/*",
-    "dist/**/*",
-    "tests/**/*",
-    "**/**/*.test.ts"
+    "dist/**/*"
   ],
   "ts-node": {
     "require": [
