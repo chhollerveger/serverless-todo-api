@@ -27,7 +27,7 @@ describe('create list controller', () => {
     const { sut, createListServiceSpy } = makeSut();
     const response = await sut.handle(mockRequest());
     const { data } = JSON.parse(response.body);
-    expect(response.statusCode).toBe(201)
+    expect(response.statusCode).toBe(201);
     expect(data).toEqual(createListServiceSpy.data);
   })
 })
