@@ -9,7 +9,7 @@ export class Created implements IResponseBody {
 
   constructor(message: string, data: IGenericType<{}>) {
     this.data = data
-    this.message = message;
     this.name = StatusName.Created;
+    this.message = message;
   }
 }
