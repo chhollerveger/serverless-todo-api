@@ -30,4 +30,18 @@ describe('create list controller', () => {
     expect(response.statusCode).toBe(201);
     expect(data).toEqual(createListServiceSpy.data);
   })
+
+  test('should return a required field validation error', async () => {
+    const { sut } = makeSut();
+    const response = await sut.handle('{}');
+    jest.spyOn('sut', 'handle')
+    expect(response.statusCode).toBe(400);
+  })
+
+  test('should return an internal error', async () => {
+    const { sut, createListServiceSpy } = makeSut();
+    jest.spyOn(createListServiceSpy, 'create').mockImplementation(() => { throw new Error() });
+    const response = await sut.handle(mockRequest());
+    expect(response.statusCode).toBe(500);
+  })
 })
