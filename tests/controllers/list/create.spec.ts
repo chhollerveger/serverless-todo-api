@@ -1,6 +1,6 @@
 import { Validator } from "@utils";
 import { CreateListController } from "@controllers";
-import { CreateListServiceSpy } from "./mocks/services/list/create-spy";
+import { CreateListServiceSpy } from "../../mocks/services/list/create-spy";
 
 type SutType = {
   sut: CreateListController;
