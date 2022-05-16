@@ -34,7 +34,6 @@ describe('create list controller', () => {
   test('should return a required field validation error', async () => {
     const { sut } = makeSut();
     const response = await sut.handle('{}');
-    jest.spyOn('sut', 'handle')
     expect(response.statusCode).toBe(400);
   })
 
