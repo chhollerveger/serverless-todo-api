@@ -10,13 +10,21 @@ type SutType = {
 }
 
 type ListRequest = {
-  body: { name: string };
+  body: ListRequestDto;
   params: ListRequestDto;
 }
 
+const mockBody = (): ListRequestDto => ({
+  name: 'my todo list updated'
+})
+
+const mockParams = (): ListRequestDto => ({
+  listId: '61470607-e7c4-486a-9334-fc2af1f4c1e5'
+})
+
 const mockRequest = (): ListRequest => {
-  const body = { name: 'my todo list updated' };
-  const params = { listId: '61470607-e7c4-486a-9334-fc2af1f4c1e5' };
+  const body = mockBody();
+  const params = mockParams();
   return { body, params };
 }
 
