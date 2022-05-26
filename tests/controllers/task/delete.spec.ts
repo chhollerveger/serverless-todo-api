@@ -25,7 +25,7 @@ const makeSut = (): SutType => {
   };
 }
 
-describe('delete list controller', () => {
+describe('delete task controller', () => {
 
   test('should successfully delete a task with correct values', async () => {
     const { sut } = makeSut();
