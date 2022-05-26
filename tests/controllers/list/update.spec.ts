@@ -1,12 +1,12 @@
 import { Validator } from "@utils";
 import { UpdateListController } from "@controllers";
-import { UpdateListServiceSpy } from "../../mocks/services/list/update-spy";
+import { ListServiceSpy } from "../../mocks/services/list-service-spy";
 import { ListRequestDto } from "@protocols";
 
 type SutType = {
   sut: UpdateListController;
   validator: Validator;
-  updateListServiceSpy: UpdateListServiceSpy;
+  listServiceSpy: ListServiceSpy;
 }
 
 type ListRequest = {
@@ -22,12 +22,12 @@ const mockRequest = (): ListRequest => {
 
 const makeSut = (): SutType => {
   const validator = new Validator();
-  const updateListServiceSpy = new UpdateListServiceSpy();
-  const sut = new UpdateListController(validator, updateListServiceSpy);
+  const listServiceSpy = new ListServiceSpy();
+  const sut = new UpdateListController(validator, listServiceSpy);
   return {
     sut,
     validator,
-    updateListServiceSpy
+    listServiceSpy
   };
 }
 
@@ -35,11 +35,11 @@ const makeSut = (): SutType => {
 describe('update list controller', () => {
 
   test('should successfully update a list with correct values', async () => {
-    const { sut, updateListServiceSpy } = makeSut();
+    const { sut, listServiceSpy } = makeSut();
     const { body, params } = mockRequest();
     const response = await sut.handle(JSON.stringify(body), params);
     expect(response.statusCode).toBe(200);
-    expect(body.name).toEqual(updateListServiceSpy.data.name);
+    expect(body.name).toEqual(listServiceSpy.data.name);
   })
 
   test('should return a required field validation error', async () => {
@@ -50,8 +50,8 @@ describe('update list controller', () => {
   })
 
   test('should return an internal error', async () => {
-    const { sut, updateListServiceSpy } = makeSut();
-    jest.spyOn(updateListServiceSpy, 'update').mockImplementation(() => { throw new Error() });
+    const { sut, listServiceSpy } = makeSut();
+    jest.spyOn(listServiceSpy, 'update').mockImplementation(() => { throw new Error() });
     const { body, params } = mockRequest();
     const response = await sut.handle(JSON.stringify(body), params);
     expect(response.statusCode).toBe(500);

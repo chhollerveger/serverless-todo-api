@@ -1,24 +1,24 @@
 import { Validator } from "@utils";
 import { DeleteListController } from "@controllers";
-import { DeleteListServiceSpy } from "../../mocks/services/list/delete-spy";
+import { ListServiceSpy } from "../../mocks/services/list-service-spy";
 import { ListRequestDto } from "@protocols";
 
 type SutType = {
   sut: DeleteListController;
   validator: Validator
-  deleteListServiceSpy: DeleteListServiceSpy
+  listServiceSpy: ListServiceSpy
 }
 
 const mockRequest = (): ListRequestDto => ({ listId: '5b411588-9860-4d88-94bd-eb33f4ed6f55' });
 
 const makeSut = (): SutType => {
   const validator = new Validator();
-  const deleteListServiceSpy = new DeleteListServiceSpy();
-  const sut = new DeleteListController(validator, deleteListServiceSpy);
+  const listServiceSpy = new ListServiceSpy();
+  const sut = new DeleteListController(validator, listServiceSpy);
   return {
     sut,
     validator,
-    deleteListServiceSpy
+    listServiceSpy
   };
 }
 
@@ -37,8 +37,8 @@ describe('delete list controller', () => {
   })
 
   test('should return an internal error', async () => {
-    const { sut, deleteListServiceSpy } = makeSut();
-    jest.spyOn(deleteListServiceSpy, 'delete').mockImplementation(() => { throw new Error() });
+    const { sut, listServiceSpy } = makeSut();
+    jest.spyOn(listServiceSpy, 'delete').mockImplementation(() => { throw new Error() });
     const response = await sut.handle(mockRequest());
     expect(response.statusCode).toBe(500);
   })
