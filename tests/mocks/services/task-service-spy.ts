@@ -1,7 +1,7 @@
-import { ICreateTaskService, IDeleteTaskService, ITaskResponseDto, TaskRequestDto } from "@protocols";
+import { ICreateTaskService, IDeleteTaskService, IGetTaskService, ITaskResponseDto, TaskRequestDto } from "@protocols";
 import { mockTaskData } from "../data/task-data";
 
-export class TaskServiceSpy implements ICreateTaskService, IDeleteTaskService {
+export class TaskServiceSpy implements ICreateTaskService, IDeleteTaskService, IGetTaskService {
   data: ITaskResponseDto = mockTaskData();
   created: {};
 
@@ -13,5 +13,12 @@ export class TaskServiceSpy implements ICreateTaskService, IDeleteTaskService {
 
   async delete(params: TaskRequestDto): Promise<void> {
     this.data.id = params.taskId;
+  }
+
+  async get(params: TaskRequestDto): Promise<ITaskResponseDto> {
+    if (params.taskId !== this.data.id && params.listId !== this.data.listId) {
+      return null;
+    }
+    return this.data;
   }
 }
