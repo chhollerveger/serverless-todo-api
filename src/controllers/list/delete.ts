@@ -1,6 +1,6 @@
 import 'source-map-support/register';
 import { IController, IDeleteListService, IValidator, ListRequestDto } from '@protocols';
-import { getListConstraint } from '@constraints';
+import { deleteListConstraint } from '@constraints';
 import { HttpResponse, HttpResponseCreator, StatusMessage } from '@presentation';
 
 export class DeleteListController implements IController {
@@ -11,7 +11,7 @@ export class DeleteListController implements IController {
 
   public async handle(params: ListRequestDto): Promise<HttpResponse> {
     try {
-      const error = this.validator.validateAgainstConstraints(params, getListConstraint());
+      const error = this.validator.validateAgainstConstraints(params, deleteListConstraint());
       if (error) {
         return HttpResponseCreator.badRequest(error);
       }
