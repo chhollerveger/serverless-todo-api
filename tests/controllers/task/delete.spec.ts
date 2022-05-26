@@ -5,8 +5,8 @@ import { TaskRequestDto } from "@protocols";
 
 type SutType = {
   sut: DeleteTaskController;
-  validator: Validator
-  taskServiceSpy: TaskServiceSpy
+  validator: Validator;
+  taskServiceSpy: TaskServiceSpy;
 }
 
 const mockRequest = (): TaskRequestDto => ({
